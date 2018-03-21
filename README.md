@@ -7,22 +7,32 @@
 These examples show the enhanced capabilities.
 
 ```julia
-using CompoundPeriods, Dates
+julia> using CompoundPeriods, Dates
 
-showit(xs...) = print("\n\t", join(map(string,(xs...,)),", "), "\n")
+julia> showit(xs...) = print("\n\t", join(map(string,(xs...,)),", "), "\n");
 
-cperiod = Day(5) + Hour(17) + Minute(35) + Second(22);
+julia> cperiod = Day(5) + Hour(17) + Minute(35) + Second(22);
 
-showit(cperiod)
-showit( cperiod[1], cperiod[end] )
+julia> showit(cperiod)
 
-rperiod = reverse(cperiod);
+	5 days, 17 hours, 35 minutes, 22 seconds
 
-showit(rperiod)
-showit( rperiod[1], rperiod[end] )
+julia> showit( cperiod[1], cperiod[end] )
 
+	5 days, 22 seconds
 
-cperiod == reverse(rperiod)
+julia> rperiod = reverse(cperiod);
+
+julia> showit(rperiod)
+
+	22 seconds, 35 minutes, 17 hours, 5 days
+
+julia> showit( rperiod[1], rperiod[end] )
+
+	22 seconds, 5 days
+
+julia> cperiod == reverse(rperiod)
+true
 ```
 
 ```julia
