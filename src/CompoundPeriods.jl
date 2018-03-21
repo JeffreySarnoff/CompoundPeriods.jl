@@ -1,7 +1,7 @@
 module CompoundPeriods
 
 export Period, CompoundPeriod,
-   typesof
+   typesof, canonical
 
 import Base: start, done, next, getindex, eltype, length,
     min, max, minmax, typemin, typemax
