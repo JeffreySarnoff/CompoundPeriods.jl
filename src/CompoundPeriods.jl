@@ -5,7 +5,7 @@ module CompoundPeriods
 export Period, CompoundPeriod, ReverseCompoundPeriod,
    typesof, canonical
 
-import Base: start, done, next, getindex, eltype, length,
+import Base: start, done, next, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse
 
 import Dates: AbstractTime, Period, CompoundPeriod,
