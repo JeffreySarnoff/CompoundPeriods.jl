@@ -9,7 +9,7 @@ import Base: start, done, next, getindex, eltype, length,
 import Dates: Period, CompoundPeriod
 using Dates
 
-include("timeunit_per")
+include("timeunitper.jl")
 include("iterable.jl")
 include("indexable.jl")
 include("min_max.jl")
