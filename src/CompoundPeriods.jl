@@ -19,7 +19,6 @@ include("reversecompound.jl")
 include("iterable.jl")
 include("indexable.jl")
 include("misc.jl")
-include("canonical.jl")
 include("selector.jl")
 include("compare.jl")
 
