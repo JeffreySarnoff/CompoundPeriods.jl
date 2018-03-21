@@ -7,9 +7,9 @@ function getindex(x::CompoundPeriod, idx::Int)
     return x.periods[idx]
 end
 
-reverseind(x::CompoundPeriod, idx) = length(x) - idx + 1
-reverseind(x::Array{Period,1}, idx) = length(x) - idx + 1
-reverseind(x::ReverseCompoundPeriod, idx) = length(x) - idx + 1
+reverseind(x::CompoundPeriod, idx::Int) = length(x) - idx + 1
+reverseind(x::Array{Period,1}, idx::Int) = length(x) - idx + 1
+reverseind(x::ReverseCompoundPeriod, idx::Int) = length(x) - idx + 1
 
 function getindex(x::ReverseCompoundPeriod, idx::Int)
     n = length(x.cperiod.periods)
