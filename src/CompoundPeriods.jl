@@ -22,8 +22,4 @@ include("selector.jl")
 include("compare.jl")
 
 
-# foreach nonempty Period in a CompoundPeriod, get type of Period
-typesof(x::CompoundPeriod) = map(typeof, x.periods)
-typesof(x::P) where {P<:Period} = (P,)
-
 end # Compound Periods
