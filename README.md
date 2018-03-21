@@ -24,3 +24,17 @@ showit( rperiod[1], rperiod[end] )
 
 cperiod == reverse(rperiod)
 ```
+
+```julia
+using Dates, CompoundPeriods
+
+cperiod1 = Month(17) + Nanosecond(9876543210)
+cperiod2 = Year(1) + Hour(98765)
+c1plus2 = cperiod1 + cperiod2
+c2minus1 = cperiod2 - cperiod1
+
+canonical(cperiod1)
+canonical(cperiod2)
+canonical(c1plus2)
+canonical(c2minus1)
+```
