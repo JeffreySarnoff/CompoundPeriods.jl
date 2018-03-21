@@ -15,6 +15,7 @@ include("timeunitper.jl")
 include("iterable.jl")
 include("indexable.jl")
 include("min_max.jl")
+include("canonical.jl")
 include("selector.jl")
 include("compare.jl")
 
