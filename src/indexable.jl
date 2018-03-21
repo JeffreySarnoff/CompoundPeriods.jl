@@ -1,3 +1,6 @@
+lastindex(x::CompoundPeriod) = length(x.periods)
+lastindex(x::ReverseCompoundPeriod) = length(x.cperiod.periods)
+
 function getindex(x::CompoundPeriod, idx::Int)
     n = length(x.periods)
     (idx == 0 || idx > n) && throw(BoundsError("$x [$idx]"))
