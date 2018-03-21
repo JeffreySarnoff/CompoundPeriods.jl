@@ -9,17 +9,18 @@ These examples show the enhanced capabilities.
 ```julia
 using CompoundPeriods, Dates
 
-cperiod = Day(5) + Hour(17) + Minute(35) + Second(22)
+showit(xs...) = print("\n\t", join(map(string,(xs...,)),", "), "\n")
 
-print("\n\t", cperiod)
+cperiod = Day(5) + Hour(17) + Minute(35) + Second(22);
 
-cperiod[1], cperiod[2], cperiod[end]
+showit(cperiod)
+showit( cperiod[1], cperiod[end] )
 
-rperiod = reverse(cperiod)
+rperiod = reverse(cperiod);
 
-print("\n\t", rperiod)
+showit(rperiod)
+showit( rperiod[1], rperiod[end] )
 
-rperiod[1], rperiod[2], rperiod[end]
 
 cperiod == reverse(rperiod)
 ```
