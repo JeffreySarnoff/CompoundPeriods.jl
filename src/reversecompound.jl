@@ -6,12 +6,7 @@ reverse(x::CompoundPeriod) = ReverseCompoundPeriod(x)
 reverse(x::ReverseCompoundPeriod) = x.cperiod
    
 function string(rperiod::ReverseCompoundPeriod)
-   str = "ReverseCompoundPeriod("
-   for aperiod in rperiod
-       str = string(str, string(aperiod),", ")
-   end
-   str = string(str[1:end-2],")")
-   return str
+    join(([string(aperiod) for aperiod in rperiod]...,),", ")
 end
 
 function show(io::IO, x::ReverseCompoundPeriod)
