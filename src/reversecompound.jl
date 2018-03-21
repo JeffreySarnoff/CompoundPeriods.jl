@@ -18,12 +18,8 @@ function show(io::IO, x::ReverseCompoundPeriod)
    print(io, string(x))
 end
 
-if isdefined(Base, :stdout)
-    function show(x::ReverseCompoundPeriod)
-       print(Base.stdout, string(x)
-    end
-else
-    function show(x::ReverseCompoundPeriod)
-       print(Base.STDOUT, string(x)
-    end
+const StdOut = isdefined(Base, :stdout) ? Base.stdout : Base.STDOUT
+
+function show(x::ReverseCompoundPeriod)
+    print(StdOut, string(x))
 end      
