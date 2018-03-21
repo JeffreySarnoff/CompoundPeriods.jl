@@ -6,7 +6,7 @@ export Period, CompoundPeriod,
    typesof, canonical
 
 import Base: start, done, next, getindex, eltype, length,
-    min, max, minmax, typemin, typemax
+    min, max, minmax, reverseind
 
 import Dates: Period, CompoundPeriod,
     Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond
