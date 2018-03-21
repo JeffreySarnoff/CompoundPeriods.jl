@@ -1,3 +1,8 @@
+# exported interface to Dates.canonicalize and enhancements
+canonical(x::Period) = canonical(CompoundPeriod(x))
+canonical(x::CompoundPeriod) = canonicalize(x)
+canonical(x::ReverseCompoundPeriod) = canonicalize(x)
+
 # foreach nonempty Period in a CompoundPeriod, get type of Period
 typesof(x::CompoundPeriod) = map(typeof, x.periods)
 typesof(x::P) where {P<:Period} = (P,)
