@@ -52,3 +52,24 @@ end
 
 canonical(x::Period) = canonical(CompoundPeriod(x))
 
+
+function isolate_days(cp::CompoundPeriod)
+    days = Day(cp)
+    cp = cp - days
+    return days, cp
+end
+
+function isolate_yearsmonths(cperiod::CompoundPeriod)
+    years = Year(cperiod)
+    months = Month(cperiod)
+    cperiod = cperiod - years
+    cperiod = cperiod - months
+    yearsmonths = years + months
+    return yearsmonths, cperiod  
+end
+
+function isolate_yearsmonths_days(cperiod:CompoundPeriod)
+    yearsmonths, cperiod = isolate_yearsmonths(cperiod)
+    days, cperiod = isolate_days(cperiod)
+    return yearsmonths, days, cperiod
+end
