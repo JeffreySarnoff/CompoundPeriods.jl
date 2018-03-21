@@ -14,6 +14,7 @@ include("iterable.jl")
 include("indexable.jl")
 include("min_max.jl")
 include("selector.jl")
+include("compare.jl")
 
 
 # foreach nonempty Period in a CompoundPeriod, get type of Period
