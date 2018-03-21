@@ -13,11 +13,9 @@ import Dates: Period, CompoundPeriod,
 
 using Dates
 
-struct ReverseCompoundPeriod
-   cperiod::CompoundPeriod
-end
 
 include("timeunitper.jl")
+include("reversecompound.jl")
 include("iterable.jl")
 include("indexable.jl")
 include("misc.jl")
