@@ -9,6 +9,14 @@ next(x::CompoundPeriod, state) = x.periods[state], state+1
 
 reverseind(x::CompoundPeriod, idx) = length(x) - idx + 1
 
+eltype(x::ReverseCompoundPeriod) = Period
+length(x::ReverseCompoundPeriod) = length(x.periods)
+
+start(x::ReverseCompoundPeriod) = length(x)
+done(x::ReverseCompoundPeriod, state) = state < 1
+next(x::ReverseCompoundPeriod, state) = x.periods[state], state-1
+
+
 # make Period iterable for interoperability with CompoundPeriod
 
 eltype(x::Period) = typeof(x)
