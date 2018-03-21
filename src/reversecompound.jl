@@ -4,8 +4,6 @@ end
 
 reverse(x::CompoundPeriod) = ReverseCompoundPeriod(x)
 reverse(x::ReverseCompoundPeriod) = x.cperiod
-   
-canonicalize(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
 
 function string(rperiod::ReverseCompoundPeriod)
     join(([string(aperiod) for aperiod in rperiod]...,),", ")
