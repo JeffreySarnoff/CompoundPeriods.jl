@@ -68,7 +68,7 @@ function isolate_yearsmonths(cperiod::CompoundPeriod)
     return yearsmonths, cperiod  
 end
 
-function isolate_yearsmonths_days(cperiod:CompoundPeriod)
+function isolate_yearsmonths_days(cperiod::CompoundPeriod)
     yearsmonths, cperiod = isolate_yearsmonths(cperiod)
     days, cperiod = isolate_days(cperiod)
     return yearsmonths, days, cperiod
