@@ -11,3 +11,44 @@ const NANOSECONDS_PER_MICROSECOND  = Int64(1_000)
 const MICROSECONDS_PER_SECOND = Int64(1_000_000)
 const NANOSECONDS_PER_MILLISECOND  = Int64(1_000_000)
 const NANOSECONDS_PER_SECOND  = Int64(1_000_000_000)
+const MILLISECONDS_PER_DAY = MILLISECONDS_PER_SECOND * SECONDS_PER_DAY
+const MICROSECONDS_PER_DAY = MICROSECONDS_PER_SECOND * SECONDS_PER_DAY
+const NANOSECONDS_PER_DAY = NANOSECONDS_PER_SECOND * SECONDS_PER_DAY
+
+Hour(x::Day) = Hour(x.value * HOURS_PER_DAY)
+Minute(x::Day) = Minute(x.value * MINUTES_PER_DAY)
+Second(x::Day) = Second(x.value * SECONDS_PER_DAY)
+Millisecond(x::Day) = Millisecond(x.value * MILLISECONDS_PER_DAY)
+Microsecond(x::Day) = Microsecond(x.value * MICROSECONDS_PER_DAY)
+Nanosecond(x::Day) = Nanosecond(x.value * NANOSECONDS_PER_DAY)
+
+Minute(x::Hour) = Minute(x.value * MINUTES_PER_HOUR)
+Second(x::Hour) = Second(x.value * SECONDS_PER_HOUR)
+Millisecond(x::Hour) = Millisecond(x.value * (MILLISECONDS_PER_SECOND * SECONDS_PER_HOUR))
+Microsecond(x::Hour) = Microsecond(x.value * (MICROSECONDS_PER_SECOND * SECONDS_PER_HOUR))
+Nanosecond(x::Hour) = Nanosecond(x.value * (NANOSECONDS_PER_SECOND * SECONDS_PER_HOUR))
+
+Second(x::Minute) = Second(x.value * SECONDS_PER_MINUTE)
+Millisecond(x::Minute) = Millisecond(x.value * (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE))
+Microsecond(x::Minute) = Microsecond(x.value * (MICROSECONDS_PER_SECOND * SECONDS_PER_MINUTE))
+Nanosecond(x::Minute) = Nanosecond(x.value * (NANOSECONDS_PER_SECOND * SECONDS_PER_MINUTE))
+
+Millisecond(x::Second) = Millisecond(x.value * MILLISECONDS_PER_SECOND)
+Microsecond(x::Second) = Microsecond(x.value * MICROSECONDS_PER_SECOND)
+Nanosecond(x::Second) = Nanosecond(x.value * NANOSECONDS_PER_SECOND)
+
+Microsecond(x::Millisecond) = Microsecond(x.value * MICROSECONDS_PER_MILLISECOND)
+Nanosecond(x::Millisecond) = Nanosecond(x.value * NANOSECONDS_PER_MILLISECOND)
+
+Nanosecond(x::Microsecond) = Nanosecond(x.value * NANOSECONDS_PER_MICROSECOND)
+
+#=
+for P in (:Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
+  @eval Day(x::$P) = Day(canonical(x))
+end
+for P in (:Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
+  @eval Hour(x::$P) = Hour(canonical(x))
+end
+=#
+  
+  
