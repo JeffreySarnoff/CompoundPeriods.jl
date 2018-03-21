@@ -6,7 +6,9 @@ export Period, CompoundPeriod,
 import Base: start, done, next, getindex, eltype, length,
     min, max, minmax, typemin, typemax
 
-import Dates: Period, CompoundPeriod
+import Dates: Period, CompoundPeriod,
+    Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond
+
 using Dates
 
 include("timeunitper.jl")
