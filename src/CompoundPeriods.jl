@@ -8,7 +8,7 @@ export Period, CompoundPeriod, ReverseCompoundPeriod,
 import Base: start, done, next, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse
 
-import Dates: AbstractTime, Period, CompoundPeriod,
+import Dates: AbstractTime, Period, CompoundPeriod, canonialize,
     Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond
 
 using Dates
