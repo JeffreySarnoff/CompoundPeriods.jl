@@ -1,3 +1,8 @@
+canonical(x::Period) = canonical(CompoundPeriod(x))
+canonical(x::CompoundPeriod) = canonicalize(x)
+canonical(x::ReverseCompoundPeriod) = canonicalize(x)
+
+#=
 function canonical(days::Day, hours::Hour=Hour(0), minutes::Minute=Minute(0), seconds::Second=Second(0), millisecs::Millisecond=Millisecond(0), microsecs::Microsecond=Microsecond(0), nanosecs::Nanosecond=Nanosecond(0))
     CompoundPeriod(Day(days), Hour(hours), minutes, seconds, millisecs, microsecs, nanosecs)
 end
@@ -37,5 +42,5 @@ function canonical(x::CompoundPeriod)
     compound = isempty(periods) ? CompoundPeriod() : reduce(+, periods)
     return compound
 end
+=#
 
-canonical(x::Period) = canonical(CompoundPeriod(x))
