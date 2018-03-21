@@ -51,4 +51,9 @@ canonical(cperiod1)
 canonical(cperiod2)
 canonical(c1plus2)
 canonical(c2minus1)
+
+adatetime = DateTime("2001-11-12T15:14:13.100")
+adatetime + cperiod1
+adatetime + cperiod2
+
 ```
