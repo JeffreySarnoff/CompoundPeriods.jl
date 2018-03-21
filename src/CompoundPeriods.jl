@@ -2,7 +2,7 @@ __precompile__()
 
 module CompoundPeriods
 
-export Period, CompoundPeriod,
+export Period, CompoundPeriod, ReverseCompoundPeriod,
    typesof, canonical
 
 import Base: start, done, next, getindex, eltype, length,
