@@ -2,6 +2,9 @@ struct ReverseCompoundPeriod <: AbstractTime
    cperiod::CompoundPeriod
 end
 
+reverse(x::CompoundPeriod) = ReverseCompoundPeriod(x)
+reverse(x::ReverseCompoundPeriod) = x.cperiod
+   
 function string(rperiod::ReverseCompoundPeriod)
    str = "ReverseCompoundPeriod("
    for aperiod in rperiod
