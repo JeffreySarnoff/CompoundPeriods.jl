@@ -33,6 +33,10 @@ julia> showit( rperiod[1], rperiod[end] )
 
 julia> cperiod == reverse(rperiod)
 true
+
+julia> min(cperiod) == min(rperiod)
+julia> minmax(cperiod), minmax(rperiod)
+
 ```
 
 ```julia
