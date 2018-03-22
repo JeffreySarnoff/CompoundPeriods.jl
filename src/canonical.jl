@@ -13,25 +13,38 @@ fldmod(x::Hour) =
 fldmod(x::Day) = x
 
 function fldmod(cperiod::CompoundPeriod)
+    periodtypes = typesof(cperiod) 
     result = CompoundPeriod()
-    microseconds, nanoseconds = fldmod(Nanosecond(cperiod))
-    result += nanoseconds
-    cperiod += microseconds
-    milliseconds, microseconds = fldmod(Microsecond(cperiod))
-    result += microseconds
-    cperiod += milliseconds
-    seconds, milliseconds = fldmod(Millisecond(cperiod))
-    result += milliseconds
-    cperiod += seconds
-    minutes, seconds = fldmod(Second(cperiod))
-    result += seconds
-    cperiod += minutes
-    hours, minutes = fldmod(Minute(cperiod))
-    result += minutes
-    cperiod += hours
-    days, hours = fldmod(Hour(cperiod))
-    result += hours
-    cperiod += days
+    if !isempty(findall(periodtypes .== Nanosecond))
+        microseconds, nanoseconds = fldmod(Nanosecond(cperiod))
+        result += nanoseconds
+        cperiod += microseconds
+    end
+    if !isempty(findall(periodtypes .== Microsecond))
+        milliseconds, microseconds = fldmod(Microsecond(cperiod))
+        result += microseconds
+        cperiod += milliseconds
+    end    
+    if !isempty(findall(periodtypes .== Millisecond))
+        seconds, milliseconds = fldmod(Millisecond(cperiod))
+        result += milliseconds
+        cperiod += seconds
+    end
+    if !isempty(findall(periodtypes .== Second))
+        minutes, seconds = fldmod(Second(cperiod))
+        result += seconds
+        cperiod += minutes
+    end    
+    if !isempty(findall(periodtypes .== Minute))
+        hours, minutes = fldmod(Minute(cperiod))
+        result += minutes
+        cperiod += hours
+    end    
+    if !isempty(findall(periodtypes .== Hour))
+       days, hours = fldmod(Hour(cperiod))
+       result += hours
+       cperiod += days
+    end    
     days = Day(cperiod)
     result += days
     return result
