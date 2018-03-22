@@ -25,3 +25,6 @@ mintype(x::ReverseCompoundPeriod) = typeof(min(x))
 max(x::Period) = x
 min(x::Period) = x
 minmax(x::Period) = x, x
+
+maxtype(x::T) where {T<:Period} = T
+mintype(x::T) where {T<:Period} = T
