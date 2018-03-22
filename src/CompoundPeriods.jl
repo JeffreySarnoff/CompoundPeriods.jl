@@ -8,7 +8,8 @@ export Period, CompoundPeriod, ReverseCompoundPeriod,
     Milliseconds, Microseconds, Nanoseconds
 
 import Base: start, done, next, getindex, lastindex, eltype, length,
-    min, max, minmax, reverseind, string, show, reverse, fldmod
+    min, max, minmax, reverseind, string, show, reverse, fldmod,
+    (==), (!=), (<=), (<), (>=), (>), isequal, isless
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
     Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond
