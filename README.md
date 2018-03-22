@@ -35,25 +35,33 @@ julia> cperiod == reverse(rperiod)
 true
 
 julia> min(cperiod), max(rperiod)
-julia> minmax(cperiod) == minmax(rperiod)
+(22 seconds, 5 days)
 
+julia> minmax(cperiod) == minmax(rperiod)
+true
 ```
 
 ```julia
-using Dates, CompoundPeriods
+julia> using Dates, CompoundPeriods
 
-cperiod1 = Month(17) + Nanosecond(9876543210)
-cperiod2 = Year(1) + Hour(98765)
-c1plus2 = cperiod1 + cperiod2
-c2minus1 = cperiod2 - cperiod1
+julia> dyhr = Day(5) + Hour(79);
 
-canonical(cperiod1)
-canonical(cperiod2)
-canonical(c1plus2)
-canonical(c2minus1)
+julia> mnsc = Minute(3600) + Second(22);
 
-adatetime = DateTime("2001-11-12T15:14:13.100")
-adatetime + cperiod1
-adatetime + cperiod2
+julia> showit( canonical(dyhr) )
 
+	1 week, 1 day, 7 hours
+
+julia> showit( canonical(mnsc) )
+
+	2 days, 12 hours, 22 seconds
+
+julia> adatetime = DateTime("2001-05-05")
+2001-05-05T00:00:00
+
+julia> adatetime + mnsc
+2001-05-07T12:00:22
+
+julia> adatetime + mnsc - dyhr
+2001-04-29T05:00:22
 ```
