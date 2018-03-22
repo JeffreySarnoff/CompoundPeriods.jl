@@ -3,7 +3,9 @@ __precompile__()
 module CompoundPeriods
 
 export Period, CompoundPeriod, ReverseCompoundPeriod,
-   typesof, canonical
+    typesof, canonical,
+    Years, Months, Days, Hours, Minutes, Seconds,
+    Milliseconds, Microseconds, Nanoseconds
 
 import Base: start, done, next, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse, fldmod
@@ -22,6 +24,6 @@ include("misc.jl")
 include("selector.jl")
 include("canonical.jl")
 include("compare.jl")
-
+include("pluralperiods.jl")
 
 end # Compound Periods
