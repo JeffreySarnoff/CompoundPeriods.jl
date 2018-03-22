@@ -16,10 +16,12 @@ import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
 
 using Dates
 
-const Periodal = Union{Period, CompoundPeriod}
 
 include("timeunitper.jl")
 include("reversecompound.jl")
+
+const Periodous = Union{CompoundPeriod, ReverseCompoundPeriod}
+
 include("iterable.jl")
 include("indexable.jl")
 include("misc.jl")
