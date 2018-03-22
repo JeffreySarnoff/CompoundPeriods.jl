@@ -7,34 +7,6 @@ plural(::Type{Hour}) = Hours
 plural(::Type{Day}) = Days
 plural(::Type{Month}) = Months
 plural(::Type{Year}) = Years
-plural(::Type{Nanoseconds}) = Nanoseconds
-plural(::Type{Microseconds}) = Microseconds
-plural(::Type{Milliseconds}) = Milliseconds
-plural(::Type{Seconds}) = Seconds
-plural(::Type{Minutes}) = Minutes
-plural(::Type{Hours}) = Hours
-plural(::Type{Days}) = Days
-plural(::Type{Months}) = Months
-plural(::Type{Years}) = Years
-
-singular(::Type{Nanoseconds}) = Nanosecond
-singular(::Type{Microseconds}) = Microsecond
-singular(::Type{Milliseconds}) = Millisecond
-singular(::Type{Seconds}) = Second
-singular(::Type{Minutes}) = Minute
-singular(::Type{Hours}) = Hour
-singular(::Type{Days}) = Day
-singular(::Type{Months}) = Month
-singular(::Type{Years}) = Year
-singular(::Type{Nanosecond}) = Nanosecond
-singular(::Type{Microsecond}) = Microsecond
-singular(::Type{Millisecond}) = Millisecond
-singular(::Type{Second}) = Second
-singular(::Type{Minute}) = Minute
-singular(::Type{Hour}) = Hour
-singular(::Type{Day}) = Day
-singular(::Type{Month}) = Month
-singular(::Type{Year}) = Year
 
 
 Nanoseconds(x::Period) = Nanosecond(x)
