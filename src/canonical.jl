@@ -13,6 +13,7 @@ fldmod(x::Hour) =
 fldmod(x::Day) = x
 
 function fldmod(cperiod::CompoundPeriod)
+    cperiod = canonical(cperiod)
     periodtypes = typesof(cperiod) 
     result = CompoundPeriod()
     if !isempty(findall(periodtypes .== Nanosecond))
