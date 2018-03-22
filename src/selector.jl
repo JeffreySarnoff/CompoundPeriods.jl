@@ -10,6 +10,11 @@ for P in (:Year, :Month, :Day, :Hour, :Minute, :Second,
   end
 end
 
+convert(::Type{Year}, x::T) where {T<:Diurnal} = Year(0)
+convert(::Type{Month}, x::T) where {T<:Diurnal} = Month(0)
+convert(::Type{T}, x::Year) where {T<:Diurnal} = T(0)
+convert(::Type{T}, x::Month) where {T<:Diurnal} = T(0)
+
 
 function isolate_days(cperiod::CompoundPeriod)
     days = Day(cperiod)
