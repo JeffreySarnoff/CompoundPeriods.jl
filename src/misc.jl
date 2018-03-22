@@ -12,9 +12,15 @@ max(x::CompoundPeriod) = isempty(x) ? x : x.periods[1]
 min(x::CompoundPeriod) = isempty(x) ? x : x.periods[end]
 minmax(x::CompoundPeriod) = min(x), max(x)
 
+maxtype(x::CompoundPeriod) = typeof(max(x))
+mintype(x::CompoundPeriod) = typeof(min(x))
+
 max(x::ReverseCompoundPeriod) = isempty(x) ? x : x.cperiod.periods[1]
 min(x::ReverseCompoundPeriod) = isempty(x) ? x : x.cperiod.periods[end]
 minmax(x::ReverseCompoundPeriod) = min(x), max(x)
+
+maxtype(x::ReverseCompoundPeriod) = typeof(max(x))
+mintype(x::ReverseCompoundPeriod) = typeof(min(x))
 
 max(x::Period) = x
 min(x::Period) = x
