@@ -6,7 +6,7 @@ export Period, CompoundPeriod, ReverseCompoundPeriod,
    typesof, canonical
 
 import Base: start, done, next, getindex, lastindex, eltype, length,
-    min, max, minmax, reverseind, string, show, reverse. fldmod
+    min, max, minmax, reverseind, string, show, reverse, fldmod
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
     Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond
