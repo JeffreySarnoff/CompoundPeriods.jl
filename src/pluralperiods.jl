@@ -44,4 +44,7 @@ Years(x::T) where {T<:Period} = Year(x)
 Years(x::CompoundPeriod) = sum(map(Year, x.periods))
 Years(x::ReverseCompoundPeriod) = sum(map(Year, x.cperiod.periods))
 
+TimeUnits(x::CompoundPeriod) = sum(map(mintype(x), x.periods))
+TimeUnits(x::ReverseCompoundPeriod) = sum(map(mintype(x), x.cperiod.periods))
+TimeUnits(x::Period) = x
 
