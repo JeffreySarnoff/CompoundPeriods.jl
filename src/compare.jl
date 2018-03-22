@@ -68,15 +68,3 @@ function (>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
     yy = typ(y)
     xx.value >= yy.value
 end
-
-
-(Months(x) < Months(y)) || ((Months(x) == Months(y)) && (Nanoseconds(x) < Nanoseconds(y)))
-(<=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} =
-    (Months(x) < Months(y)) || ((Months(x) == Months(y)) && (Nanoseconds(x) <= Nanoseconds(y)))
-(>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} =
-    (Months(x) > Months(y)) || ((Months(x) == Months(y)) && (Nanoseconds(x) > Nanoseconds(y)))
-(>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} =
-    (Months(x) > Months(y)) || ((Months(x) == Months(y)) && (Nanoseconds(x) >= Nanoseconds(y)))
-
-Base.isless(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = x < y
-Base.isequal(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = x == y
