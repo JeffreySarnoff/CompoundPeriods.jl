@@ -61,6 +61,14 @@ julia> result
 ```
 
 ```julia
+julia>  time_translation = canonical(Minute(-3600) + Second(22))
+-2 days, -11 hours, -59 minutes, -38 seconds
+
+julia> temporal_algebra = fldmod(time_translation)
+-3 days, 12 hours, 22 seconds
+```
+
+```julia
 julia> using Dates, CompoundPeriods
 
 julia> dyhr = Day(5) + Hour(79)
@@ -100,3 +108,4 @@ julia> min(cperiod), max(rperiod)
 julia> minmax(cperiod) == minmax(rperiod)
 true
 ```
+
