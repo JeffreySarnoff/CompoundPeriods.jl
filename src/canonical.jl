@@ -1,5 +1,5 @@
 fldmod(x::Nanosecond) =
-    map((f, x)->f(x), (Microsecond,Nanosecond), Bfldmod(x.value, NANOSECONDS_PER_MICROSECOND))
+    map((f, x)->f(x), (Microsecond,Nanosecond), fldmod(x.value, NANOSECONDS_PER_MICROSECOND))
 fldmod(x::Microsecond) =
     map((f, x)->f(x), (Millisecond,Microsecond), fldmod(x.value, MICROSECONDS_PER_MILLISECOND))
 fldmod(x::Millisecond) =
