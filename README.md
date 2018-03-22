@@ -66,6 +66,14 @@ julia>  time_translation = canonical(Minute(-3600) + Second(22))
 
 julia> temporal_algebra = fldmod(time_translation)
 -3 days, 12 hours, 22 seconds
+
+julia> cperiod = Day(2)+Hour(5)+Second(3)
+julia> Second(cperiod), Hour(cperiod), Day(cperiod)
+
+julia> Seconds(cperiod), Hours(cperiod), Days(cperiod)
+julia> TimeUnits(Hour(25)+Microsecond(123456))
+julia> TimeUnits(Day(2)+Hour(12))
+
 ```
 
 ```julia
