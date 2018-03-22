@@ -9,3 +9,5 @@ rperiod = reverse(cperiod)
 time_translation = canonical(Minute(-3600) + Second(22))
 temporal_algebra = fldmod(time_translation)
 @test temporal_algebra - Day(temporal_algebra) > Hour(12)
+
+@test TimeUnits(Minute(10)+Microsecond(100)) == 600000100 microseconds
