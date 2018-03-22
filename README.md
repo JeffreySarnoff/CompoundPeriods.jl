@@ -30,15 +30,6 @@ julia> showit(rperiod)
 julia> showit( rperiod[1], rperiod[end] )
 
 	22 seconds, 5 days
-
-julia> cperiod == reverse(rperiod)
-true
-
-julia> min(cperiod), max(rperiod)
-(22 seconds, 5 days)
-
-julia> minmax(cperiod) == minmax(rperiod)
-true
 ```
 
 ```julia
@@ -61,4 +52,23 @@ julia> Time(adatetime) + Nanosecond(4321)
 
 julia> adatetime + mnsc
 2004-02-28T12:00:22
+```
+
+```julia
+julia> using CompoundPeriods, Dates
+
+julia> cperiod = Day(5) + Hour(17) + Minute(35)
+5 days, 17 hours, 35 minutes
+
+julia> rperiod = reverse(cperiod)
+35 minutes, 17 hours, 5 days
+
+julia> cperiod == reverse(rperiod)
+true
+
+julia> min(cperiod), max(rperiod)
+(35 minutes, 5 days)
+
+julia> minmax(cperiod) == minmax(rperiod)
+true
 ```
