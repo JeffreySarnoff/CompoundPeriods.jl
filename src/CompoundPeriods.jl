@@ -5,7 +5,7 @@ module CompoundPeriods
 export Period, CompoundPeriod, ReverseCompoundPeriod,
     typesof, canonical,
     Years, Months, Days, Hours, Minutes, Seconds,
-    Milliseconds, Microseconds, Nanoseconds
+    Milliseconds, Microseconds, Nanoseconds, TimeUnits
 
 import Base: start, done, next, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse, fldmod,
