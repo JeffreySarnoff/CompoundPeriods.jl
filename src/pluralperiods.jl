@@ -24,7 +24,7 @@ Minutes(x::T) where {T<:Periodous} = Minutes(TimeUnits(x))
 
 Hours(x::T) where {T<:Union{Nanosecond, Microsecond, Millisecond, Second, Minute}} = floor(x, Hour)
 Hours(x::T) where {T<:Period} = Hour(x)
-Hours(x::T) where {T<:Periodous} = Hourss(TimeUnits(x))
+Hours(x::T) where {T<:Periodous} = Hours(TimeUnits(x))
 
 Days(x::T) where {T<:Union{Nanosecond, Microsecond, Millisecond, Second, Minute, Hour}} = floor(x, Day)
 Days(x::T) where {T<:Period} = Day(x)
