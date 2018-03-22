@@ -17,7 +17,7 @@ Base.isequal(::Type{P1}, ::Type{P2}) where {P1<:Period, P2<:Period} = P1(1) == P
 
 Base.:(==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = false
 Base.:(!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = true
-Base.:(<)(x::P1, y::P2) where {P1<:CompundPeriod, P2<:Period} = max(x) < y
+Base.:(<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = max(x) < y
 Base.:(<=)(x::P1, y::P2) where {P1<:CompoudPeriod, P2<:Period} = max(x) <= y
 Base.:(>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = max(x) > y
 Base.:(>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period} = max(x) > y
