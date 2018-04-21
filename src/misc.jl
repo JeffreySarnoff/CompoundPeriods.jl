@@ -28,3 +28,6 @@ minmax(x::Period) = x, x
 
 maxtype(x::T) where {T<:Period} = T
 mintype(x::T) where {T<:Period} = T
+
+Base.zero(::Type{CompoundPeriod}) = Nanosecond(0)
+Base.zero(::Type{ReverseCompoundPeriod}) = Nanosecond(0)
