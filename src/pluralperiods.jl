@@ -77,3 +77,31 @@ Years(x::CompoundPeriod) = sum(map(Year, x.periods))
 Years(x::ReverseCompoundPeriod) = sum(map(Year, x.cperiod.periods))
 
 years(x::T) where {T<:Union{Period,Periodous}} = Years(x).value
+
+
+
+for (P, Q) in ((:Years,:years), (:Months,:months), (:Weeks,:weeks), (:Days,:days),
+               (:Hours,:hours), (:Minutes,:minutes), (:Seconds,:seconds),
+               (:Milliseconds,:milliseconds), (:Microseconds,:microseconds),
+               (:Nanoseconds,:nanoseconds))
+    @eval begin
+        $P(x::DateTime) = $P(CompoundPeriod(x))
+        $Q(x::DateTime) = $Q(CompoundPeriod(x))
+    end
+end
+
+for (P, Q) in ((:Years,:years), (:Months,:months), (:Days, :days))
+    @eval begin
+        $P(x::Date) = $P(CompoundPeriod(x))
+        $Q(x::Date) = $Q(CompoundPeriod(x))
+    end
+end
+
+for (P, Q) in ((:Hours,:hours), (:Minutes,:minutes), (:Seconds,:seconds),
+               (:Milliseconds,:milliseconds), (:Microseconds,:microseconds),
+               (:Nanoseconds,:nanoseconds))
+    @eval begin
+        $P(x::Time) = $P(CompoundPeriod(x))
+        $Q(x::Time) = $Q(CompoundPeriod(x))
+    end
+end
