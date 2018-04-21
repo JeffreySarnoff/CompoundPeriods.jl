@@ -5,6 +5,7 @@ plural(::Type{Second}) = Seconds
 plural(::Type{Minute}) = Minutes
 plural(::Type{Hour}) = Hours
 plural(::Type{Day}) = Days
+plural(::Type{Week}) = Weeks
 plural(::Type{Month}) = Months
 plural(::Type{Year}) = Years
 
