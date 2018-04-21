@@ -41,6 +41,6 @@ function Date(dt::CompoundPeriod)
     yr = year(dt)       
     mo = max(1, month(dt))
     dy = max(1, day(dt))
-    return Date(yr, mo, dt)
+    return Date(yr, mo, dy)
 end
 DateTime(dtm::CompoundPeriod)  = Date(dtm) + Time(hour(dtm), minute(dtm), second(dtm), millisecond(dtm))
