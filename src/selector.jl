@@ -12,7 +12,7 @@ end
 
 for (P,Q) in ((:Year, :year), (:Month, :month), (:Week, :week), (:Day, :day),
               (:Hour, :hour), (:Minute, :minute), (:Second, :second),
-              (:Millsecond, :millisecond), (:Microsecond, :microsecond),
+              (:Millisecond, :millisecond), (:Microsecond, :microsecond),
               (:Nanosecond, :nanosecond))
   @eval begin
      function $Q(x::CompoundPeriod)
