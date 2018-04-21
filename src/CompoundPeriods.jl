@@ -13,7 +13,8 @@ import Base: convert,
     (==), (!=), (<=), (<), (>=), (>), isequal, isless
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
-    Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond
+    Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
+    year, month, day, hour, minute, second, millisecond, microsecond, nanosecond
 
 using Dates
 
