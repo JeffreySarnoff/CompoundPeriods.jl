@@ -1,5 +1,5 @@
 for P in (:Year, :Month, :Week, :Day, :Hour, :Minute, :Second,
-          :Millsecond, :Microsecond, :Nanosecond)
+          :Millisecond, :Microsecond, :Nanosecond)
   @eval begin
      function $P(x::CompoundPeriod)
          typs = typesof(x)
