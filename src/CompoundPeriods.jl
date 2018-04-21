@@ -18,6 +18,7 @@ import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
     Year, Month, Week, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
     year, month, week, day, hour, minute, second, millisecond, microsecond, nanosecond
 
+using Dates: Time, Date, DateTime
 using Dates
 
 
