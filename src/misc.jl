@@ -35,3 +35,7 @@ Base.zero(::Type{ReverseCompoundPeriod}) = Nanosecond(0)
 CompoundPeriod(tm::Time) = Hour(tm)+Minute(tm)+Second(tm)+Millisecond(tm)+Microsecond(tm)+Nanosecond(tm)
 CompoundPeriod(dt::Date) = Year(dt)+Month(dt)+Day(dt)
 CompoundPeriod(dtm::DateTime) = CompoundPeriod(Date(dtm)) + CompoundPeriod(Time(dtm))
+
+Time(tm::CompoundPeriod) = Time(hour(tm),minute(tm),second(tm),millisecond(tm),microsecond(tm),nanosecond(tm))
+Date(dt::CompoundPeriod) = Date(year(dt), month(dt), day(dt))
+DateTime(dtm::CompoundPeriod)  = DateTime(year(dtm), month(dtm), day(dtm), hour(dtm), minute(dtm), second(dtm), millisecond(dtm))
