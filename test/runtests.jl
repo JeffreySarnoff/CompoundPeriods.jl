@@ -13,4 +13,4 @@ temporal_algebra = fldmod(time_translation)
 @test TimeUnits(Minute(10)+Microsecond(100)) == Microsecond(600000100)
 
 @test Month(Year(3)+Month(2)) == Month(2)
-@test hour(Day(5)+Hour(3)+Second(1)) == Hour(3)
+@test hour(Day(5)+Hour(3)+Second(1)) == 3
