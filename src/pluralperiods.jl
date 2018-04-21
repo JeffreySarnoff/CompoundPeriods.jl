@@ -14,8 +14,7 @@ Nanoseconds(x::Period) = Nanosecond(x)
 Nanoseconds(x::CompoundPeriod) = sum(map(Nanosecond, x.periods))
 Nanoseconds(x::ReverseCompoundPeriod) = sum(map(Nanosecond, x.cperiod.periods))
 
-nanoseconds(x::T) where {T<:Union{Period,CompoundPeriod,ReverseCompoudPeriod}} =
-    Nanoseconds(x).value
+nanoseconds(x::T) where {T<:Union{Period,Periodous}} = Nanoseconds(x).value
 
 TimeUnits(x::CompoundPeriod) = sum(map(mintype(x), x.periods))
 TimeUnits(x::ReverseCompoundPeriod) = sum(map(mintype(x), x.cperiod.periods))
