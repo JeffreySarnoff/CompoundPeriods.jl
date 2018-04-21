@@ -9,27 +9,22 @@ These examples show the enhanced capabilities.
 ```julia
 julia> using CompoundPeriods, Dates
 
-julia> showit(xs...) = print("\n\t", join(map(string,(xs...,)),", "), "\n");
-
 julia> cperiod = Day(5) + Hour(17) + Minute(35) + Second(22);
 
-julia> showit(cperiod)
+julia> cperiod
+5 days, 17 hours, 35 minutes, 22 seconds
 
-	5 days, 17 hours, 35 minutes, 22 seconds
+julia> Hour(cperiod), hour(cperiod)
+Hour(17), 17
 
-julia> showit( cperiod[1], cperiod[end] )
+julia> cperiod[1], cperiod[end]
+5 days, 22 seconds
 
-	5 days, 22 seconds
+julia> rperiod = reverse(cperiod)
+22 seconds, 35 minutes, 17 hours, 5 days
 
-julia> rperiod = reverse(cperiod);
-
-julia> showit(rperiod)
-
-	22 seconds, 35 minutes, 17 hours, 5 days
-
-julia> showit( rperiod[1], rperiod[end] )
-
-	22 seconds, 5 days
+julia> rperiod[1], rperiod[end]
+22 seconds, 5 days
 ```
 
 ```julia
