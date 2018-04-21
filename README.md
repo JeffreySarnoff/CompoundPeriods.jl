@@ -9,22 +9,26 @@ These examples show the enhanced capabilities.
 ```julia
 julia> using Dates, CompoundPeriods
 
-julia> cperiod = Day(5) + Hour(17) + Minute(35) + Second(22);
+julia> cperiod = Day(2) - Hour(18) + Second(3605)
+2 days, -18 hours, 3605 seconds
 
-julia> cperiod
-5 days, 17 hours, 35 minutes, 22 seconds
+julia> Day(cperiod), Hour(cperiod), Second(cperiod)
+(2 days, -18 hours, 3605 seconds)
 
-julia> Hour(cperiod), hour(cperiod)
-Hour(17), 17
+julia> day(cperiod), hour(cperiod), second(cperiod)
+(2, -18, 3605)
+
+julia> cperiod = canonical(cperiod)
+1 day, 7 hours, 5 seconds
+
+julia> Day(cperiod), Hour(cperiod), Second(cperiod)
+(1 day, 7 hours, 5 seconds)
+
+julia> day(cperiod), hour(cperiod), second(cperiod)
+(1, 7, 5)
 
 julia> cperiod[1], cperiod[end]
-5 days, 22 seconds
-
-julia> rperiod = reverse(cperiod)
-22 seconds, 35 minutes, 17 hours, 5 days
-
-julia> rperiod[1], rperiod[end]
-22 seconds, 5 days
+1 day, 5 seconds
 ```
 
 ```julia
