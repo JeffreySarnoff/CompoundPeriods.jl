@@ -7,7 +7,7 @@
 These examples show the enhanced capabilities.
 
 ```julia
-julia> using CompoundPeriods, Dates
+julia> using Dates, CompoundPeriods
 
 julia> cperiod = Day(5) + Hour(17) + Minute(35) + Second(22);
 
