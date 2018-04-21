@@ -32,7 +32,7 @@ mintype(x::T) where {T<:Period} = T
 Base.zero(::Type{CompoundPeriod}) = Nanosecond(0)
 Base.zero(::Type{ReverseCompoundPeriod}) = Nanosecond(0)
 
-CompoundPeriod(tm::Time) = Hour(tm)+Minute(tm)+Second(tm)+Millisecond(tm)+Microsecond(tm)+Nanosecond(tm)
+# CompoundPeriod(::Time) is exported from Dates
 CompoundPeriod(dt::Date) = Year(dt)+Month(dt)+Day(dt)
 CompoundPeriod(dtm::DateTime) = CompoundPeriod(Date(dtm)) + CompoundPeriod(Time(dtm))
 
