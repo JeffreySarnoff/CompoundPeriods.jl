@@ -1,4 +1,4 @@
-for P in (:Year, :Month, :Day, :Hour, :Minute, :Second,
+for P in (:Year, :Month, :Week, :Day, :Hour, :Minute, :Second,
           :Millsecond, :Microsecond, :Nanosecond)
   @eval begin
      function $P(x::CompoundPeriod)
@@ -6,6 +6,20 @@ for P in (:Year, :Month, :Day, :Hour, :Minute, :Second,
          idx = findall(typs .=== $P)
          isempty(idx) && return $P(0)
          return x.periods[idx[1]]
+     end
+  end
+end
+
+for (P,Q) in ((:Year, :year), (:Month, :month), (:Week, :week), (:Day, :day),
+              (:Hour, :hour), (:Minute, :minute), (:Second, :second),
+              (:Millsecond, :millisecond), (:Microsecond, :microsecond),
+              (:Nanosecond, :nanosecond))
+  @eval begin
+     function $Q(x::CompoundPeriod)
+         typs = typesof(x)
+         idx = findall(typs .=== $P)
+         isempty(idx) && return 0
+         return x.periods[idx[1]].value
      end
   end
 end
