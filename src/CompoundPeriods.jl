@@ -4,8 +4,10 @@ module CompoundPeriods
 
 export Period, CompoundPeriod, ReverseCompoundPeriod,
     typesof, canonical,
-    Years, Months, Days, Hours, Minutes, Seconds,
-    Milliseconds, Microseconds, Nanoseconds, TimeUnits
+    Years, Months, Weeks, Days, Hours, Minutes, Seconds,
+    Milliseconds, Microseconds, Nanoseconds, TimeUnits,
+    years, months, weeks, days, hours, minutes, seconds,
+    milliseconds, microseconds, nanoseconds
 
 import Base: convert, 
     start, done, next, getindex, lastindex, eltype, length,
@@ -13,8 +15,8 @@ import Base: convert,
     (==), (!=), (<=), (<), (>=), (>), isequal, isless
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
-    Year, Month, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
-    year, month, day, hour, minute, second, millisecond, microsecond, nanosecond
+    Year, Month, Week, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
+    year, month, week, day, hour, minute, second, millisecond, microsecond, nanosecond
 
 using Dates
 
