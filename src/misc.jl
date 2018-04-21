@@ -37,5 +37,10 @@ CompoundPeriod(dt::Date) = Year(dt)+Month(dt)+Day(dt)
 CompoundPeriod(dtm::DateTime) = CompoundPeriod(Date(dtm)) + CompoundPeriod(Time(dtm))
 
 Time(tm::CompoundPeriod) = Time(hour(tm),minute(tm),second(tm),millisecond(tm),microsecond(tm),nanosecond(tm))
-Date(dt::CompoundPeriod) = Date(year(dt), month(dt), day(dt))
-DateTime(dtm::CompoundPeriod)  = DateTime(year(dtm), month(dtm), day(dtm), hour(dtm), minute(dtm), second(dtm), millisecond(dtm))
+function Date(dt::CompoundPeriod)
+    yr = year(dt)       
+    mo = max(1, month(dt))
+    dy = max(1, day(dt))
+    return Date(yr, mo, dt)
+end
+DateTime(dtm::CompoundPeriod)  = Date(dtm) + Time(hour(dtm), minute(dtm), second(dtm), millisecond(dtm))
