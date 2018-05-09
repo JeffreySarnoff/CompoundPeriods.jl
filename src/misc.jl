@@ -44,3 +44,8 @@ function Date(dt::CompoundPeriod)
     return Date(yr, mo, dy)
 end
 DateTime(dtm::CompoundPeriod)  = Date(dtm) + Time(hour(dtm), minute(dtm), second(dtm), millisecond(dtm))
+
+signbit(period::Period) = signbit(period.value)
+signbit(cperiod::CompoundPeriod) = signbit(max(canonical(cperiod)))
+sign(period::Period) = sign(period.value)
+sign(cperiod::CompoundPeriod) = sign(max(canonical(cperiod)))
