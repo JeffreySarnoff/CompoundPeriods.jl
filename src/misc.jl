@@ -1,5 +1,4 @@
 # exported interface to Dates.canonicalize and enhancements
-canonical(x::Period) = canonical(CompoundPeriod(x))
 canonical(x::CompoundPeriod) = canonicalize(x)
 canonical(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
 
