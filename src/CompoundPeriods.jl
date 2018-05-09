@@ -12,7 +12,8 @@ export Period, CompoundPeriod, ReverseCompoundPeriod,
 import Base: convert, 
     start, done, next, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse, fldmod,
-    (==), (!=), (<=), (<), (>=), (>), isequal, isless
+    (==), (!=), (<=), (<), (>=), (>), isequal, isless,
+    sign, signbit
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
     Year, Month, Week, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
