@@ -1,5 +1,3 @@
-
-
 @inline fldmod(x::Nanosecond) =
     map((f, x)->f(x), (Microsecond,Nanosecond), fldmod(x.value, NANOSECONDS_PER_MICROSECOND))
 @inline fldmod(x::Microsecond) =
