@@ -27,6 +27,7 @@ function canonical(x::Month)
     end
 end
 
+
 @inline fldmod(x::Nanosecond) =
     map((f, x)->f(x), (Microsecond,Nanosecond), fldmod(x.value, NANOSECONDS_PER_MICROSECOND))
 @inline fldmod(x::Microsecond) =
@@ -44,6 +45,7 @@ end
     map((f, x)->f(x), (Year, Month), fldmod(x.value, MONTHS_PER_YEAR))
 
 function fldmod(cperiod::CompoundPeriod)
+    isempty(cperiod) && return cperiod
     cperiod_ymd   = Year(cperiod) + Month(cperiod) + Day(cperiod)
     cperiod_hours = cperiod - cperiod_ymd
     
