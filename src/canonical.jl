@@ -27,6 +27,16 @@ function canonical(x::Month)
     end
 end
 
+canonical(x::Year) = x
+
+function canonical(cperiod::CompoundPeriod)
+    result = CompoundPeriod
+    for p in reverse(cperiod)
+        result = (result + sum(fldmod(p)))
+    end
+    return sum(fldmod(sum(result)))
+end
+
 
 @inline fldmod(x::Nanosecond) =
     map((f, x)->f(x), (Microsecond,Nanosecond), fldmod(x.value, NANOSECONDS_PER_MICROSECOND))
