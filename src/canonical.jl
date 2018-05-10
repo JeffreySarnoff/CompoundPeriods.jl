@@ -2,10 +2,6 @@ const Day1 = Day(1)
 const Month1 = Month(1)
 const Year1 = Year(1)
 
-# exported interface to Dates.canonicalize and enhancements
-
-canonical(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
-
 for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (:Microsecond, 1000), (:Nanosecond, 1000))
     @eval begin
         function canonical(x::$P)
