@@ -43,29 +43,47 @@ end
 @inline fldmod(x::Day) = x
 @inline fldmod(x::Month) =
     map((f, x)->f(x), (Year, Month), fldmod(x.value, MONTHS_PER_YEAR))
+@inline fldmod(x::Year) = x
+
+@inline function fldmod(yr::Year, mo::Month)
+    y, mo = fldmod(mo)
+    yr += y
+    return yr, mo
+end
+
+@inline function fldmod(yr::Year, mo::Month, dy::Day)
+    yr, mo = fldmod(yr, mo)
+    ymd = Date(yr,mo,1) + dy
+    return Year(ymd), Month(ymd), Day(ymd)
+end
 
 function fldmod(cperiod::CompoundPeriod)
     isempty(cperiod) && return cperiod
-    yr = Year(cperiod)
-    if isempty(yr)
-        cperiod_ymd = yr
+    maxtype = typeof(max(cperiod))
+    mintype = typeof(min(cperiod))
+    if maxtype <= Hour
+        fldmod_hours(cperiod)
+    elseif maxtype <= Day
+        dy = Day(cperiod)
+        dy + fldmod_hours(cperiod - dy)
+    elseif maxtype == Year
+        cperiod2 = Year(cperiod) + Month(cperiod) + Day(cperiod)
+        ymd = fldmod_years(cperiod2)
+        if mintype < Day
+            cperiod2 = cperiod - cperiod2
+            hms = fldmod_hours(cperiod2)
+            dy = hms[1]
+            hms = hms[2:end]
+            ymd = CompoundPeriod(Date(ymd...,) + dy)
+            ymd + sum(hms)
+        else
+            ymd
+        end
     else
-        cperiod_ymd   = Year(cperiod) + Month(cperiod) + Day(cperiod)
+        throw(ErrorException(DomainError(string("fldmod expects Year, or maxtype of Day ($cperiod)"))))
     end
-    cperiod_hours = cperiod - cperiod_ymd
-    
-    ymd = fldmod_years(cperiod_ymd)
-    hrs = fldmod_hours(cperiod_hours)
-    dy = hrs[1]
-    if length(ymd) > 0 && dy.value > 0
-        dt = Date(ymd...,)
-        dt += dy
-        hrs -= dy
-    end
-    
-    result = (ymd..., hrs...,)
-    return result
 end
+
 
 function fldmod_hours(cperiod::CompoundPeriod)
     isempty(cperiod) && return cperiod
