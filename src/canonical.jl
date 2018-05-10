@@ -30,7 +30,7 @@ function canonical(cperiod::ReverseCompoundPeriod)
     for p in cperiod
         result = (result + sum(fldmod(p)))
     end
-    return sum(fldmod(sum(result)))
+    return result
 end
 
 canonical(cperiod::CompoundPeriod) = canonical(reverse(cperiod))
