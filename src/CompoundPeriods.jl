@@ -37,6 +37,5 @@ include("selector.jl")
 include("canonical.jl")
 include("compare.jl")
 include("pluralperiods.jl")
-include("arith.jl")
 
 end # Compound Periods
