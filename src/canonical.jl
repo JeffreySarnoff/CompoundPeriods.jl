@@ -61,7 +61,7 @@ end
 
 @inline function fldmod(yr::Year, mo::Month, dy::Day)
     yr, mo = fldmod(yr, mo)
-    ymd = Date(yr,mo,1) + dy
+    ymd = Date(yr.value, mo.value, 1) + dy
     return Year(ymd), Month(ymd), Day(ymd)
 end
 
