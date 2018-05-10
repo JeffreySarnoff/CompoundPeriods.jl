@@ -19,8 +19,6 @@ for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (
 end
             
 # exported interface to Dates.canonicalize and enhancements
-canonical(x::CompoundPeriod) = canonicalize(x)
-canonical(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
 function canonical(x::Month) 
     if 0 < x.value <= MONTHS_PER_YEAR
         x
