@@ -1,3 +1,4 @@
+#=
 function (+)(cperiod1::CompoundPeriod, cperiod2::CompoundPeriod)
     isempty(cperiod1) && return cperiod2
     isempty(cperiod2) && return cperiod1
@@ -17,7 +18,7 @@ function (-)(cperiod1::CompoundPeriod, cperiod2::CompoundPeriod)
     end
     return result
 end
-#=
+
 function (+)(cperiod::CompoundPeriod, period::Period)
     isempty(cperiod) && return period
     isempty(period) && return cperiod
