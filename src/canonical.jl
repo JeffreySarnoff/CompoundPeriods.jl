@@ -1,4 +1,5 @@
 const Day1 = Day(1)
+const Month1 = Month(1)
 const Year1 = Year(1)
 
 # exported interface to Dates.canonicalize and enhancements
@@ -17,6 +18,9 @@ for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (
     end
 end
             
+# exported interface to Dates.canonicalize and enhancements
+canonical(x::CompoundPeriod) = canonicalize(x)
+canonical(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
 function canonical(x::Month) 
     if 0 < x.value <= MONTHS_PER_YEAR
         x
@@ -38,45 +42,47 @@ end
 @inline fldmod(x::Hour) =
     map((f, x)->f(x), (Day, Hour), fldmod(x.value, HOURS_PER_DAY))
 @inline fldmod(x::Day) = x
+@inline fldmod(x::Month) =
+    map((f, x)->f(x), (Year, Month), fldmod(x.value, MONTHS_PER_YEAR))
 
 function fldmod(cperiod::CompoundPeriod)
-    cperiod = canonical(cperiod)
-    periodtypes = typesof(cperiod)
-    presentperiods = Set(periodtypes)
     result = CompoundPeriod()
-    if Nanosecond in presentperiods
-        microseconds, nanoseconds = fldmod(Nanosecond(cperiod))
-        result += nanoseconds
-        cperiod += microseconds
+    micros, nanos = fldmod(Nanosecond(cperiod))
+    micros += Microsecond(cperiod)
+    millis, micros = fldmod(micros)
+    millis += Millisecond(cperiod)
+    secs, millis = fldmod(millis)
+    secs += Second(cperiod)
+    mins, secs = fldmod(secs)
+    mins += Minute(cperiod)
+    hrs, mins = fldmod(mins)
+    hrs += Hour(cperiod)
+    dys, hrs = fldmod(hrs)
+    if dys < Day1
+        dys -= Day1
     end
-    if Microsecond in presentperiods
-        milliseconds, microseconds = fldmod(Microsecond(cperiod))
-        result += microseconds
-        cperiod += milliseconds
-    end    
-    if Millisecond in presentperiods
-        seconds, milliseconds = fldmod(Millisecond(cperiod))
-        result += milliseconds
-        cperiod += seconds
+    
+    # tm = Time(hrs.value, mins.value, secs.value, millis.value, micros.value, nanos.value)
+    
+    dys += Day(cperiod)
+    if dys < Day1
+        dys -= Day1
     end
-    if Second in presentperiods
-        minutes, seconds = fldmod(Second(cperiod))
-        result += seconds
-        cperiod += minutes
-    end    
-    if Minute in presentperiods
-        hours, minutes = fldmod(Minute(cperiod))
-        result += minutes
-        cperiod += hours
-    end    
-    if Hour in presentperiods
-       days, hours = fldmod(Hour(cperiod))
-       result += hours
-       cperiod += days
-    end    
-    days = Day(cperiod)
-    result += days
-    return result
+    
+    yrs, mos = fldmod(Month(cperiod))
+    yrs += Year(cperiod)
+    if mos < Month1
+        mos -= Month1
+        ym = yrs+months
+        yrs, mos = Year(yrm), Month(ym)
+    end
+    
+    dt = CompoundPeriod(Date(yrs.value, mos.value, 1) + dys)
+    dys = Day(dt)
+    mos = Month(dt)
+    yrs = Year(dt)
+    
+    return yrs, mos, dys, hrs, mins, secs, millis, micros, nanos
 end
 
     
