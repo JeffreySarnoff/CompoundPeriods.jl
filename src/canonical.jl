@@ -73,7 +73,7 @@ function fldmod(cperiod::CompoundPeriod)
         fldmod_hours(cperiod)
     elseif maxtype <= Day
         dy = Day(cperiod)
-        dy + fldmod_hours(cperiod - dy)
+        dy += sum(fldmod_hours(cperiod - dy))
     elseif maxtype == Year
         cperiod2 = Year(cperiod) + Month(cperiod) + Day(cperiod)
         ymd = fldmod_years(cperiod2)
@@ -85,7 +85,7 @@ function fldmod(cperiod::CompoundPeriod)
             ymd = CompoundPeriod(Date(ymd...,) + dy)
             ymd + sum(hms)
         else
-            ymd
+            sum(ymd)
         end
     else
         throw(ErrorException(DomainError(string("fldmod expects Year, or maxtype of Day ($cperiod)"))))
