@@ -49,7 +49,7 @@ function fldmod(cperiod::CompoundPeriod)
     cperiod_ymd   = Year(cperiod) + Month(cperiod) + Day(cperiod)
     cperiod_hours = cperiod - cperiod_ymd
     
-    ymd = fldmod_ymd(cperiod_ymd)
+    ymd = fldmod_years(cperiod_ymd)
     hrs = fldmod_hours(cperiod_hours)
     dy = Day(hrs)
     if length(ymd) > 0 && dy.value > 0
