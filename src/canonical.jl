@@ -72,7 +72,7 @@ function fldmod(cperiod::CompoundPeriod)
     if mos < Month1
         mos -= Month1
         ym = yrs+mos
-        yrs, mos = Year(yrm), Month(ym)
+        yrs, mos = Year(ym), Month(ym)
     end
     
     dt = CompoundPeriod(Date(yrs.value, mos.value, 1) + dys)
