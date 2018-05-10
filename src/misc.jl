@@ -42,5 +42,4 @@ DateTime(dtm::CompoundPeriod)  = Date(dtm) + Time(hour(dtm), minute(dtm), second
 
 signbit(period::Period) = signbit(period.value)
 signbit(cperiod::CompoundPeriod) = signbit(max(canonical(cperiod)))
-sign(period::Period) = sign(period.value)
 sign(cperiod::CompoundPeriod) = sign(max(canonical(cperiod)))
