@@ -63,6 +63,7 @@ function fldmod(cperiod::CompoundPeriod)
 end
 
 function fldmod_hours(cperiod::CompoundPeriod)
+    isempty(cperiod) && return cperiod
     result = CompoundPeriod()
     micros, nanos = fldmod(Nanosecond(cperiod))
     micros += Microsecond(cperiod)
@@ -84,6 +85,7 @@ end
 
 
 function fldmod_days(cperiod::CompoundPeriod)
+    isempty(cperiod) && return cperiod
     result = CompoundPeriod()
     micros, nanos = fldmod(Nanosecond(cperiod))
     micros += Microsecond(cperiod)
@@ -112,6 +114,7 @@ end
 
 
 function fldmod_years(cperiod::CompoundPeriod)    
+    isempty(cperiod) && return cperiod
     yrs, mos = fldmod(Month(cperiod))
     yrs += Year(cperiod)
     if mos < Month1
@@ -119,6 +122,7 @@ function fldmod_years(cperiod::CompoundPeriod)
         ym = yrs+mos
         yrs, mos = Year(ym), Month(ym)
     end
+    dys = Day(cperiod)
     dt = Date(yrs.value,1,1)
     dt = dt + mos
     dt = dt + dys
