@@ -13,7 +13,8 @@ import Base: convert,
     start, done, next, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse, fldmod,
     (==), (!=), (<=), (<), (>=), (>), isequal, isless,
-    sign, signbit
+    sign, signbit,
+    (+), (-), (*)
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
     Year, Month, Week, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
