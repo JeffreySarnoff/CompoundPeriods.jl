@@ -28,7 +28,7 @@ include("timeunitper.jl")
 include("reversecompound.jl")
 
 const Diurnal   = Union{Nanosecond, Microsecond, Millisecond, Second, Minute, Hour, Day, Week}
-const Periodous = Union{CompoundPeriod, ReverseCompoundPeriod}
+const Compounds = Union{CompoundPeriod, ReverseCompoundPeriod}
 
 include("iterable.jl")
 include("indexable.jl")
