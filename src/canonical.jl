@@ -75,10 +75,9 @@ function fldmod(cperiod::CompoundPeriod)
         dy = Day(cperiod)
         dy += sum(fldmod_hours(cperiod - dy))
     elseif maxtype == Year
-        cperiod2 = Year(cperiod) + Month(cperiod) + Day(cperiod)
-        ymd = fldmod_years(cperiod2)
+        ymd = sum(fldmod(Year(cperiod), Month(cperiod), Day(cperiod)))
         if mintype < Day
-            cperiod2 = cperiod - cperiod2
+            cperiod2 = cperiod - ymd
             hms = fldmod_hours(cperiod2)
             dy = hms[1]
             hms = hms[2:end]
