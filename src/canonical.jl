@@ -3,7 +3,7 @@ const Month1 = Month(1)
 const Year1 = Year(1)
 
 # exported interface to Dates.canonicalize and enhancements
-canonical(x::CompoundPeriod) = canonicalize(x)
+
 canonical(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
 
 for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (:Microsecond, 1000), (:Nanosecond, 1000))
@@ -29,13 +29,15 @@ end
 
 canonical(x::Year) = x
 
-function canonical(cperiod::CompoundPeriod)
+function canonical(cperiod::ReverseCompoundPeriod)
     result = CompoundPeriod
-    for p in reverse(cperiod)
+    for p in cperiod
         result = (result + sum(fldmod(p)))
     end
     return sum(fldmod(sum(result)))
 end
+
+canonical(cperiod::CompoundPeriod) = canonical(reverse(cperiod))
 
 
 @inline fldmod(x::Nanosecond) =
