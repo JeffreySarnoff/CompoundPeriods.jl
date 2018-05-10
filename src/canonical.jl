@@ -1,3 +1,20 @@
+const Day1 = Day(1)
+
+# exported interface to Dates.canonicalize and enhancements
+canonical(x::CompoundPeriod) = canonicalize(x)
+canonical(x::ReverseCompoundPeriod) = ReverseCompoundPeriod(canonicalize(x.cperiod))
+
+for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (:Microsecond, 1000), (:Nanosecond, 1000))
+    @eval begin
+        function canonical(x::$P)
+            0 <= x.value < $M && return x
+            canonical(Day1 + x) - Day1
+        end
+    end
+end
+            
+canonical(x::Period) = x
+
 @inline fldmod(x::Nanosecond) =
     map((f, x)->f(x), (Microsecond,Nanosecond), fldmod(x.value, NANOSECONDS_PER_MICROSECOND))
 @inline fldmod(x::Microsecond) =
