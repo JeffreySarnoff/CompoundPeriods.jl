@@ -26,13 +26,11 @@ end
 canonical(x::Year) = x
 
 function canonical(cperiod::ReverseCompoundPeriod)
-    res = CompoundPeriod()
+    result = CompoundPeriod
     for p in cperiod
-        res = (res + sum(fldmod(p)))
+        result = (result + sum(fldmod(p)))
     end
-    result = sum(res)
-    result = sum(fldmod(result))
-    return result
+    return sum(fldmod(sum(result)))
 end
 
 canonical(cperiod::CompoundPeriod) = canonical(reverse(cperiod))
