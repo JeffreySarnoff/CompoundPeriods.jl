@@ -1,3 +1,5 @@
+const CompoundPeriodZero = Nanosecond(0)
+
 const Day1 = Day(1)
 const Month1 = Month(1)
 const Year1 = Year(1)
@@ -33,7 +35,8 @@ function canonical(cperiod::ReverseCompoundPeriod)
     return sum(fldmod(sum(result)))
 end
 
-canonical(cperiod::CompoundPeriod) = canonical(reverse(cperiod))
+canonical(cperiod::CompoundPeriod) =
+    !isempty(cperiod) ? canonical(reverse(cperiod)) : CompoundPeriodZero
 
 
 @inline fldmod(x::Nanosecond) =
