@@ -14,3 +14,6 @@ temporal_algebra = fldmod(time_translation)
 
 @test Month(Year(3)+Month(2)) == Month(2)
 @test hour(Day(5)+Hour(3)+Second(1)) == 3
+
+@test isempty(Hour(0) + Minute(0))
+@test canonical(Hour(0)+Minute(0)) == Nanosecond(0)
