@@ -1,5 +1,3 @@
-__precompile__()
-
 module CompoundPeriods
 
 export Period, CompoundPeriod, ReverseCompoundPeriod,
