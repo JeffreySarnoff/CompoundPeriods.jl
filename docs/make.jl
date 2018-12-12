@@ -5,8 +5,12 @@ makedocs(
     sitename = "CompoundPeriods",
     pages  = Any[
         "Overview"                 => "index.md",
-        "References"               => "references.md",
-        "Index"                    => "documentindex.md"
+        "Example 1"                => "example1.md",
+        "Example 2"                => "example2.md"
+        "Example 3"                => "example3.md",
+        "Example 4"                => "example4.md"
+        "Example 5"                => "example5.md",
+        "Example 6"                => "example6.md"
         ]
     )
 
