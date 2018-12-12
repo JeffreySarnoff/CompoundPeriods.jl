@@ -4,13 +4,13 @@ makedocs(
     modules = [CompoundPeriods],
     sitename = "CompoundPeriods",
     pages  = Any[
-        "Overview"                 => "index.md",
-        "Example 1"                => "example1.md",
-        "Example 2"                => "example2.md",
-        "Example 3"                => "example3.md",
-        "Example 4"                => "example4.md",
-        "Example 5"                => "example5.md",
-        "Example 6"                => "example6.md"
+        "Overview"                           => "index.md",
+        "Canonical Compound Periods"         => "example1.md",
+        "Reverse Compound Periods"           => "example2.md",
+        "Well Behaved Temporal Composites"   => "example3.md",
+        "Nanosecond Increments"              => "example4.md",
+        "min, max, minmax"                   => "example5.md",
+        "Dates, Times"                       => "example6.md"
         ]
     )
 
