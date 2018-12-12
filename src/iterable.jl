@@ -18,13 +18,14 @@ function Base.iterate(x::CompoundPeriod, state::Int)
 end
 
 function Base.iterate(x::ReverseCompoundPeriod)
-    iszero(length(x)) && return nothing
-    return (x.cperiod.periods[1], 1)
+    n = length(x)
+    iszero(n) && return nothing
+    return (x.cperiod.periods[n], n)
 end
 
 function Base.iterate(x::ReverseCompoundPeriod, state::Int)
-    state === length(x) && return nothing
-    state += 1
+    state === 1 && return nothing
+    state -= 1
     return (x.cperiod.periods[state], state)
 end
 
