@@ -9,7 +9,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example1/#",
+    "location": "canonicalcompoundperiods/#",
     "page": "Canonical Compound Periods",
     "title": "Canonical Compound Periods",
     "category": "page",
@@ -17,7 +17,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example2/#",
+    "location": "reversecompoundperiods/#",
     "page": "Reverse Compound Periods",
     "title": "Reverse Compound Periods",
     "category": "page",
@@ -25,7 +25,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example3/#",
+    "location": "wellbehavedtemporalcomposites/#",
     "page": "Well Behaved Temporal Composites",
     "title": "Well Behaved Temporal Composites",
     "category": "page",
@@ -33,7 +33,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example4/#",
+    "location": "nanosecondincrements/#",
     "page": "Nanosecond Increments",
     "title": "Nanosecond Increments",
     "category": "page",
@@ -41,7 +41,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example5/#",
+    "location": "minmaxminmax/#",
     "page": "min, max, minmax",
     "title": "min, max, minmax",
     "category": "page",
@@ -49,7 +49,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example6/#",
+    "location": "datestimes/#",
     "page": "Dates, Times",
     "title": "Dates, Times",
     "category": "page",
