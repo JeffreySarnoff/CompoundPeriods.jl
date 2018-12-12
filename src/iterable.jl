@@ -34,7 +34,5 @@ end
 eltype(x::Period) = typeof(x)
 length(x::Period) = 1
 
-Base.iterate(x::Period) = 1
-Base.iterate(x::Period, state::Int=1) = state > 1 ? nothing : x, 2
-
-
+Base.iterate(x::Period) = (x, 1)
+Base.iterate(x::Period, state::Int) = nothing
