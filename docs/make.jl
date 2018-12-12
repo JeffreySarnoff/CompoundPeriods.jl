@@ -5,12 +5,12 @@ makedocs(
     sitename = "CompoundPeriods",
     pages  = Any[
         "Overview"                           => "index.md",
-        "Canonical Compound Periods"         => "example1.md",
-        "Reverse Compound Periods"           => "example2.md",
-        "Well Behaved Temporal Composites"   => "example3.md",
-        "Nanosecond Increments"              => "example4.md",
-        "min, max, minmax"                   => "example5.md",
-        "Dates, Times"                       => "example6.md"
+        "Canonical Compound Periods"         => "canonicalcompoundperiods.md",
+        "Reverse Compound Periods"           => "reversecompoundperiods.md",
+        "Well Behaved Temporal Composites"   => "wellbehavedtemporalcomposites.md",
+        "Nanosecond Increments"              => "nanosecondincrements.md",
+        "min, max, minmax"                   => "minmaxminmax.md",
+        "Dates, Times"                       => "datestimes.md"
         ]
     )
 
