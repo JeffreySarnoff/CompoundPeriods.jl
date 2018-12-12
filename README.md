@@ -1,7 +1,14 @@
 ## CompoundPeriods.jl
 ### Some enhancements for Dates.CompoundPeriod (Julia v1)
 
-#### Jeffrey Sarnoff &copy; 2018.&nbsp; This software is available for use under the MIT License.
+----
+
+#### Copyright ©&thinsp;2018 by Jeffrey Sarnoff. &nbsp;&nbsp; This work is made available under The MIT License.
+
+-----
+
+[![Build Status](https://travis-ci.org/JeffreySarnoff/CompoundPeriods.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/CompoundPeriods.jl)
+ 
 -----
 
 These examples show the enhanced capabilities.
