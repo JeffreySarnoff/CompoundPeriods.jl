@@ -7,7 +7,7 @@ export Period, CompoundPeriod, ReverseCompoundPeriod,
     years, months, weeks, days, hours, minutes, seconds,
     milliseconds, microseconds, nanoseconds
 
-import Base: convert, length,
+import Base: convert,
     iterate, getindex, lastindex, eltype, length,
     min, max, minmax, reverseind, string, show, reverse, fldmod,
     (==), (!=), (<=), (<), (>=), (>), isequal, isless,
