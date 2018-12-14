@@ -13,23 +13,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Overview",
     "title": "CompoundPeriods",
     "category": "section",
-    "text": "This package enhances the CompoundPeriod type defined within Dates (Dates.CompoundPeriod).  A CompoundPeriod is formed by attaching (adding) two or more distinct Periods: Year(1999) + Month(12), Hour(5) + Minute(15) + Second(25)."
-},
-
-{
-    "location": "#get-the-package-1",
-    "page": "Overview",
-    "title": "get the package",
-    "category": "section",
-    "text": "julia> ]\npkg> up\npkg> add CompoundPeriods\npkg> <backspace>"
-},
-
-{
-    "location": "#use-the-package-1",
-    "page": "Overview",
-    "title": "use the package",
-    "category": "section",
-    "text": "Use CompoundPeriods, Dates julia> using CompoundPeriods, Dates\njulia>"
+    "text": "This package enhances the CompoundPeriod type defined within Dates (Dates.CompoundPeriod).  A CompoundPeriod is formed by attaching (adding) two or more distinct Periods:julia> using Dates\n\njulia> typeof( Year(1999) ), typeof( Hour(15) )\nYear, Hour\n\njulia> typeof( Year(1999) + Hour(15) )\nDates.CompoundPeriod\n\njulia> typeof( Year(1999) + Month(12) + Day(5) + Hour(15) + Nanosecond(25) )\nDates.CompoundPeriod\n````\n\n## get the packagejulia julia> ] pkg> up pkg> add CompoundPeriods pkg> <backspace>\n## use the package\nUse `CompoundPeriods, Dates` julia julia> using CompoundPeriods, Dates julia> ```"
 },
 
 {
