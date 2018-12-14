@@ -23,7 +23,6 @@ Dates.CompoundPeriod <: Dates.AbstractTime
 
 ```julia
 julia> ]
-pkg> up
 pkg> add CompoundPeriods
 pkg> <backspace>
 ```
