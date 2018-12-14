@@ -23,7 +23,7 @@ julia> typeof( Year(1999) + Hour(15) )
 Dates.CompoundPeriod
 ```
 
-Note that `typeof( _CompoundPeriod_ )` is shown as `CompoundPeriod` rather than `Dates.CompoundPeriod`. This lets you know that enhanced CompoundPeriods are in use.
+Note that `typeof( `_CompoundPeriod_` )` is shown as `CompoundPeriod` rather than `Dates.CompoundPeriod`. This lets you know that enhanced CompoundPeriods are in use.
  
 ```julia
 julia> using CompoundPeriods, Dates
