@@ -12,9 +12,15 @@ Dates.CompoundPeriod
 
 julia> typeof( Year(1999) + Month(12) + Day(5) + Hour(15) + Nanosecond(25) )
 Dates.CompoundPeriod
+
+julia> dump(ans)
+Dates.CompoundPeriod <: Dates.AbstractTime
+  periods::Array{Period,1}
+
 ````
 
 ## get the package
+
 ```julia
 julia> ]
 pkg> up
@@ -23,8 +29,19 @@ pkg> <backspace>
 ```
 
 ## use the package
-Use `CompoundPeriods, Dates` 
+
+Note that `typeof( <Period>(n) + <Period>(n) )` is shown as `CompoundPeriod` rather than `Dates.CompoundPeriod`.
+This lets you know that enhanced CompoundPeriods are in use.
+
 ```julia
 julia> using CompoundPeriods, Dates
-julia>
+
+julia> typeof( Year(1999) ), typeof( Hour(15) )
+Year, Hour
+
+julia> typeof( Year(1999) + Hour(15) )
+CompoundPeriod
+
+julia> typeof( Year(1999) + Month(12) + Day(5) + Hour(15) + Nanosecond(25) )
+CompoundPeriod
 ```
