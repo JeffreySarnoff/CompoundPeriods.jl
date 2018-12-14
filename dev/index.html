@@ -9,8 +9,17 @@ Dates.CompoundPeriod
 
 julia&gt; typeof( Year(1999) + Month(12) + Day(5) + Hour(15) + Nanosecond(25) )
 Dates.CompoundPeriod
+
+julia&gt; dump(ans)
+Dates.CompoundPeriod &lt;: Dates.AbstractTime
+  periods::Array{Period,1}
+
 ````
 
-## get the package</code></pre><p>julia julia&gt; ] pkg&gt; up pkg&gt; add CompoundPeriods pkg&gt; &lt;backspace&gt;</p><pre><code class="language-none">
+## get the package
+</code></pre><p>julia julia&gt; ] pkg&gt; up pkg&gt; add CompoundPeriods pkg&gt; &lt;backspace&gt;</p><pre><code class="language-none">
 ## use the package
-Use `CompoundPeriods, Dates` </code></pre><p>julia julia&gt; using CompoundPeriods, Dates julia&gt; ```</p><footer><hr/><a class="next" href="canonicalcompoundperiods/"><span class="direction">Next</span><span class="title">Canonical Compound Periods</span></a></footer></article></body></html>
+
+Note that `typeof( &lt;Period&gt;(n) + &lt;Period&gt;(n) )` is shown as `CompoundPeriod` rather than `Dates.CompoundPeriod`.
+This lets you know that enhanced CompoundPeriods are in use.
+</code></pre><p>julia julia&gt; using CompoundPeriods, Dates</p><p>julia&gt; typeof( Year(1999) ), typeof( Hour(15) ) Year, Hour</p><p>julia&gt; typeof( Year(1999) + Hour(15) ) CompoundPeriod</p><p>julia&gt; typeof( Year(1999) + Month(12) + Day(5) + Hour(15) + Nanosecond(25) ) CompoundPeriod ```</p><footer><hr/><a class="next" href="canonicalcompoundperiods/"><span class="direction">Next</span><span class="title">Canonical Compound Periods</span></a></footer></article></body></html>
