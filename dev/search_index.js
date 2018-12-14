@@ -5,7 +5,31 @@ var documenterSearchIndex = {"docs": [
     "page": "Overview",
     "title": "Overview",
     "category": "page",
-    "text": "Examples that show how to use the enhanced capabilities."
+    "text": ""
+},
+
+{
+    "location": "#CompoundPeriods-1",
+    "page": "Overview",
+    "title": "CompoundPeriods",
+    "category": "section",
+    "text": "This package enhances the CompoundPeriod type defined within Dates (Dates.CompoundPeriod).  A CompoundPeriod is formed by attaching (adding) two or more distinct Periods: Year(1999) + Month(12), Hour(5) + Minute(15) + Second(25)."
+},
+
+{
+    "location": "#get-the-package-1",
+    "page": "Overview",
+    "title": "get the package",
+    "category": "section",
+    "text": "julia> ]\npkg> up\npkg> add CompoundPeriods\npkg> <backspace>"
+},
+
+{
+    "location": "#use-the-package-1",
+    "page": "Overview",
+    "title": "use the package",
+    "category": "section",
+    "text": "Use CompoundPeriods, Dates julia> using CompoundPeriods, Dates\njulia>"
 },
 
 {
