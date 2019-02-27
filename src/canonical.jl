@@ -29,28 +29,72 @@ fldmod(x::Millisecond) = fldmod1(fldmod(x, Millisecond(MILLISECONDS_PER_SECOND))
 fldmod(x::Microsecond) = fldmod1(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
 fldmod(x::Nanosecond) = fldmod1(fldmod(x, Millisecond(NANOSECONDS_PER_MICROSECOND))...,)
 
-canonical(x::Month) = 0 <= x.value < MONTHS_PER_YEAR ? x : sum(fldmod(x))
-
-canonical(x::Hour) = 0 <= x.value < HOURS_PER_DAY ? x : sum(fldmod(x))
-
-canonical(x::Minute) = 0 <= x.value < MINUTES_PER_HOUR ? x : sum(cannonical(fldmod1(x))
-canonical(x::Second) = 0 <= x.value < SECONDS_PER_MINUTE ? x : sum(fldmod(x))
-canonical(x::Millisecond) = 0 <= x.value < MILLISECONDS_PER_SECOND ? x : sum(fldmod(x))
-canonical(x::Microsecond) = 0 <= x.value < MICROSECONDS_PER_MILLISECOND ? x : sum(fldmod(x))
-canonical(x::Nanosecond) = 0 <= x.value < NANOSECONDS_PER_MICROSECOND ? x : sum(fldmod(x))
-
-for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (:Microsecond, 1000), (:Nanosecond, 1000))
-    @eval begin
-        function canonical(x::$P)
-            if 0 <= x.value < $M
-                x
-            else
-                canonical(Day1 + x) - Day1
-            end
-        end
-    end
+function canonical(x::Nanosecond)
+    result = fldmod(x)
+    result = (fldmod(result[1])..., result[2])
+    result = (fldmod(result[1])..., result[2:end]...,)
+    result = (fldmod(result[1])..., result[2:end]...,)
+    result = (fldmod(result[1])..., result[2:end]...,)
+    result = (fldmod(result[1])..., result[2:end]...,)
+    return sum(result)
 end
-            
+
+function canonical(x::Microsecond)
+    result = fldmod(x)
+    result = (fldmod(result[1])..., result[2])
+    result = (fldmod(result[1])..., result[2:end]...,)
+    result = (fldmod(result[1])..., result[2:end]...,)
+    result = (fldmod(result[1])..., result[2:end]...,)
+    return sum(result)
+end
+
+function canonical(x::Millisecond)
+    result = fldmod(x)
+    result = (fldmod(result[1])..., result[2])
+    result = (fldmod(result[1])..., result[2:end]...,)
+    result = (fldmod(result[1])..., result[2:end]...,)
+    return sum(result)
+end
+
+function canonical(x::Second; weeks::Bool=false)
+    result = fldmod(x)
+    result = (fldmod(result[1])..., result[2])
+    result = (fldmod(result[1])..., result[2:end]...,)
+    if weeks
+        result = (fldmod(result[1])..., result[2:end]...,)
+    end
+    return sum(result)
+end
+
+function canonical(x::Minute; weeks::Bool=false)
+    result = fldmod(x)
+    result = (fldmod(result[1])..., result[2])
+    if weeks
+        result = (fldmod(result[1])..., result[2:end]...,)
+    end
+    return sum(result)
+end
+
+function canonical(x::Hour; weeks::Bool=false)
+    result = fldmod(x)
+    if weeks
+        result = (fldmod(result[1])..., result[2:end]...,)
+    end       
+    return sum(result)
+end
+
+fuction canonical(x::Day; weeks::Bool=false)
+    weeks ? sum(fldmod(x)) : x
+end
+    
+canonical(x::Week) = x
+
+function canonical(x::Month)
+    result = fldmod(x)
+    return sum(result)
+end
+
+canonical(x::Year) = x
 # exported interface to Dates.canonicalize and enhancements
 function canonical(x::Month) 
     if 0 <= x.value < MONTHS_PER_YEAR
@@ -72,24 +116,6 @@ end
 
 canonical(cperiod::CompoundPeriod) =
     !isempty(cperiod) ? canonical(reverse(cperiod)) : CompoundPeriodZero
-
-
-@inline fldmod(x::Nanosecond) =
-    map((f, x)->f(x), (Microsecond,Nanosecond), fldmod(x.value, NANOSECONDS_PER_MICROSECOND))
-@inline fldmod(x::Microsecond) =
-    map((f, x)->f(x), (Millisecond,Microsecond), fldmod(x.value, MICROSECONDS_PER_MILLISECOND))
-@inline fldmod(x::Millisecond) =
-    map((f, x)->f(x), (Second,Millisecond), fldmod(x.value, MILLISECONDS_PER_SECOND))
-@inline fldmod(x::Second) =
-    map((f, x)->f(x), (Minute,Second), fldmod(x.value, SECONDS_PER_MINUTE))
-@inline fldmod(x::Minute) =
-    map((f, x)->f(x), (Hour,Minute), fldmod(x.value, MINUTES_PER_HOUR))
-@inline fldmod(x::Hour) =
-    map((f, x)->f(x), (Day, Hour), fldmod(x.value, HOURS_PER_DAY))
-@inline fldmod(x::Day) = x
-@inline fldmod(x::Month) =
-    map((f, x)->f(x), (Year, Month), fldmod(x.value, MONTHS_PER_YEAR))
-@inline fldmod(x::Year) = x
 
 @inline function fldmod(yr::Year, mo::Month)
     y, mo = fldmod(mo)
