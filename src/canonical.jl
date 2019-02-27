@@ -30,7 +30,7 @@ function canonical(x::Nanosecond; weeks::Bool=false)
     if weeks
         result = (fldmod(result[1])..., result[2:end]...,)
     end
-    return sum(result)    return sum(result)
+    return sum(result)
 end
 
 function canonical(x::Microsecond; weeks::Bool=false)
@@ -42,7 +42,7 @@ function canonical(x::Microsecond; weeks::Bool=false)
     if weeks
         result = (fldmod(result[1])..., result[2:end]...,)
     end
-    return sum(result)    return sum(result)
+    return sum(result)
 end
 
 function canonical(x::Millisecond; weeks::Bool=false)
