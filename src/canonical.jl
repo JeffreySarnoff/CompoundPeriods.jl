@@ -1,8 +1,43 @@
 const CompoundPeriodZero = Nanosecond(0)
 
-const Day1 = Day(1)
+const Day1   = Day(1)
+const Week1  = Week(1)
 const Month1 = Month(1)
-const Year1 = Year(1)
+const Year1  = Year(1)
+
+cannonical(x::Year) = x
+cannonical(x::Week) = x
+cannonical(x::Day)  = x
+
+fldmod1(x::Int64, y::Month) = (Year(x), y)
+fldmod1(x::Int64, y::Day) = (Week(x), y)
+fldmod1(x::Int64, y::Hour) = (Day(x), y)
+fldmod1(x::Int64, y::Minute) = (Hour(x), y)
+fldmod1(x::Int64, y::Second) = (Minute(x), y)
+fldmod1(x::Int64, y::Millisecond) = (Second(x), y)
+fldmod1(x::Int64, y::Microsecond) = (Millisecond(x), y)
+fldmod1(x::Int64, y::Nanosecond) = (Microsecond(x), y)
+
+fldmod(x::Year) = x
+fldmod(x::Month) = fldmod1(fldmod(x, Month(MONTHS_PER_YEAR))...,)
+fldmod(x::Week) = x
+fldmod(x::Day) = fldmod1(fldmod(x, Day(DAYS_PER_WEEK))...,)
+fldmod(x::Hour) = fldmod1(fldmod(x, Hour(HOURS_PER_DAY))...,)
+fldmod(x::Minute) = fldmod1(fldmod(x, Minute(MINUTES_PER_HOUR))...,)
+fldmod(x::Second) = fldmod1(fldmod(x, Second(SECONDS_PER_MINUTE))...,)
+fldmod(x::Millisecond) = fldmod1(fldmod(x, Millisecond(MILLISECONDS_PER_SECOND))...,)
+fldmod(x::Microsecond) = fldmod1(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
+fldmod(x::Nanosecond) = fldmod1(fldmod(x, Millisecond(NANOSECONDS_PER_MICROSECOND))...,)
+
+canonical(x::Month) = 0 <= x.value < MONTHS_PER_YEAR ? x : sum(fldmod(x))
+
+canonical(x::Hour) = 0 <= x.value < HOURS_PER_DAY ? x : sum(fldmod(x))
+
+canonical(x::Minute) = 0 <= x.value < MINUTES_PER_HOUR ? x : sum(cannonical(fldmod1(x))
+canonical(x::Second) = 0 <= x.value < SECONDS_PER_MINUTE ? x : sum(fldmod(x))
+canonical(x::Millisecond) = 0 <= x.value < MILLISECONDS_PER_SECOND ? x : sum(fldmod(x))
+canonical(x::Microsecond) = 0 <= x.value < MICROSECONDS_PER_MILLISECOND ? x : sum(fldmod(x))
+canonical(x::Nanosecond) = 0 <= x.value < NANOSECONDS_PER_MICROSECOND ? x : sum(fldmod(x))
 
 for (P,M) in ((:Hour, 24), (:Minute, 60), (:Second, 60), (:Millisecond, 1000), (:Microsecond, 1000), (:Nanosecond, 1000))
     @eval begin
@@ -18,10 +53,10 @@ end
             
 # exported interface to Dates.canonicalize and enhancements
 function canonical(x::Month) 
-    if 0 < x.value <= MONTHS_PER_YEAR
+    if 0 <= x.value < MONTHS_PER_YEAR
         x
     else
-        canonical(Year1 + x) - Year1
+        canonical(Year1 + x) - Year1 - Day1
     end
 end
 
