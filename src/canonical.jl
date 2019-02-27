@@ -18,7 +18,7 @@ fldmod(x::Minute) = fldmod1(fldmod(x, Minute(MINUTES_PER_HOUR))...,)
 fldmod(x::Second) = fldmod1(fldmod(x, Second(SECONDS_PER_MINUTE))...,)
 fldmod(x::Millisecond) = fldmod1(fldmod(x, Millisecond(MILLISECONDS_PER_SECOND))...,)
 fldmod(x::Microsecond) = fldmod1(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
-fldmod(x::Nanosecond) = fldmod1(fldmod(x, Millisecond(NANOSECONDS_PER_MICROSECOND))...,)
+fldmod(x::Nanosecond) = fldmod1(fldmod(x, Nanosecond(NANOSECONDS_PER_MICROSECOND))...,)
 
 function canonical(x::Nanosecond)
     result = fldmod(x)
