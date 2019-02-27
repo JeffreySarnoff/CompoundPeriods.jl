@@ -125,6 +125,7 @@ function fldmod(cperiod::CompoundPeriod)
         w,dy = fldmod(Days(cperiod) - Day(wk.value*DAYS_PER_WEEK))
         wk += w
         dy += sum(fldmod_hours(cperiod - dy))
+        wk + dy
     elseif maxtype == Year
         ymd = sum(fldmod(Year(cperiod), Month(cperiod), Day(cperiod)))
         if mintype < Day
