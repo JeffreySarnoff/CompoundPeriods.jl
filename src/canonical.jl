@@ -83,7 +83,7 @@ function canonical(x::Hour; weeks::Bool=false)
     return sum(result)
 end
 
-fuction canonical(x::Day; weeks::Bool=false)
+function canonical(x::Day; weeks::Bool=false)
     weeks ? sum(fldmod(x)) : x
 end
     
