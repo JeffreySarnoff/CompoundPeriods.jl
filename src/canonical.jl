@@ -96,16 +96,6 @@ end
 
 canonical(x::Year) = x
 # exported interface to Dates.canonicalize and enhancements
-function canonical(x::Month) 
-    if 0 <= x.value < MONTHS_PER_YEAR
-        x
-    else
-        canonical(Year1 + x) - Year1 - Day1
-    end
-end
-
-canonical(x::Year) = x
-
 function canonical(cperiod::ReverseCompoundPeriod)
     result = CompoundPeriod()
     for p in cperiod
