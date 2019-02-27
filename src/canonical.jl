@@ -20,30 +20,39 @@ fldmod(x::Millisecond) = fldmod1(fldmod(x, Millisecond(MILLISECONDS_PER_SECOND))
 fldmod(x::Microsecond) = fldmod1(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
 fldmod(x::Nanosecond) = fldmod1(fldmod(x, Nanosecond(NANOSECONDS_PER_MICROSECOND))...,)
 
-function canonical(x::Nanosecond)
+function canonical(x::Nanosecond; weeks::Bool=false)
     result = fldmod(x)
     result = (fldmod(result[1])..., result[2])
     result = (fldmod(result[1])..., result[2:end]...,)
     result = (fldmod(result[1])..., result[2:end]...,)
     result = (fldmod(result[1])..., result[2:end]...,)
     result = (fldmod(result[1])..., result[2:end]...,)
-    return sum(result)
+    if weeks
+        result = (fldmod(result[1])..., result[2:end]...,)
+    end
+    return sum(result)    return sum(result)
 end
 
-function canonical(x::Microsecond)
+function canonical(x::Microsecond; weeks::Bool=false)
     result = fldmod(x)
     result = (fldmod(result[1])..., result[2])
     result = (fldmod(result[1])..., result[2:end]...,)
     result = (fldmod(result[1])..., result[2:end]...,)
     result = (fldmod(result[1])..., result[2:end]...,)
-    return sum(result)
+    if weeks
+        result = (fldmod(result[1])..., result[2:end]...,)
+    end
+    return sum(result)    return sum(result)
 end
 
-function canonical(x::Millisecond)
+function canonical(x::Millisecond; weeks::Bool=false)
     result = fldmod(x)
     result = (fldmod(result[1])..., result[2])
     result = (fldmod(result[1])..., result[2:end]...,)
     result = (fldmod(result[1])..., result[2:end]...,)
+    if weeks
+        result = (fldmod(result[1])..., result[2:end]...,)
+    end
     return sum(result)
 end
 
@@ -88,16 +97,19 @@ end
 canonical(x::Year) = x
 
 # exported interface to Dates.canonicalize and enhancements
-function canonical(cperiod::ReverseCompoundPeriod)
+function canonical(cperiod::ReverseCompoundPeriod; weeks::Bool=false)
     result = CompoundPeriod()
     for p in cperiod
         result = (result + sum(fldmod(p)))
     end
+    if !weeks
+        result = result - Week(result) + Days(Week(result))
+    end
     return sum(fldmod(sum(result)))
 end
 
-canonical(cperiod::CompoundPeriod) =
-    !isempty(cperiod) ? canonical(reverse(cperiod)) : CompoundPeriodZero
+canonical(cperiod::CompoundPeriod; weeks::Bool=false) =
+    !isempty(cperiod) ? canonical(reverse(cperiod), weeks=weeks) : CompoundPeriodZero
 
 @inline function fldmod(yr::Year, mo::Month)
     y, mo = fldmod(mo)
