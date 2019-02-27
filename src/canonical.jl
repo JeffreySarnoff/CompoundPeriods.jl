@@ -1,14 +1,5 @@
 const CompoundPeriodZero = Nanosecond(0)
 
-const Day1   = Day(1)
-const Week1  = Week(1)
-const Month1 = Month(1)
-const Year1  = Year(1)
-
-cannonical(x::Year) = x
-cannonical(x::Week) = x
-cannonical(x::Day)  = x
-
 fldmod1(x::Int64, y::Month) = (Year(x), y)
 fldmod1(x::Int64, y::Day) = (Week(x), y)
 fldmod1(x::Int64, y::Hour) = (Day(x), y)
@@ -95,6 +86,7 @@ function canonical(x::Month)
 end
 
 canonical(x::Year) = x
+
 # exported interface to Dates.canonicalize and enhancements
 function canonical(cperiod::ReverseCompoundPeriod)
     result = CompoundPeriod()
