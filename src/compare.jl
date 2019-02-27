@@ -69,7 +69,7 @@ function (>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
     xx.value >= yy.value
 end
 
-const PeriodTypes = (:Year, :Month, :Day, :Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
+const PeriodTypes = (:Year, :Month, :Week, :Day, :Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
 
 for P in PeriodTypes
     @eval isless(::Type{$P}, ::Type{$P}) = false
