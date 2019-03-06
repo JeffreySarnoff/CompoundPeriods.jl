@@ -9,16 +9,16 @@ fldmod2(x::Int64, y::Millisecond) = (Second(x), y)
 fldmod2(x::Int64, y::Microsecond) = (Millisecond(x), y)
 fldmod2(x::Int64, y::Nanosecond) = (Microsecond(x), y)
 
-fldmod(x::Year) = x
-fldmod(x::Month) = fldmod2(fldmod(x, Month(MONTHS_PER_YEAR))...,)
-fldmod(x::Week) = x
-fldmod(x::Day) = fldmod2(fldmod(x, Day(DAYS_PER_WEEK))...,)
-fldmod(x::Hour) = fldmod2(fldmod(x, Hour(HOURS_PER_DAY))...,)
-fldmod(x::Minute) = fldmod2(fldmod(x, Minute(MINUTES_PER_HOUR))...,)
-fldmod(x::Second) = fldmod2(fldmod(x, Second(SECONDS_PER_MINUTE))...,)
-fldmod(x::Millisecond) = fldmod2(fldmod(x, Millisecond(MILLISECONDS_PER_SECOND))...,)
-fldmod(x::Microsecond) = fldmod2(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
-fldmod(x::Nanosecond) = fldmod2(fldmod(x, Nanosecond(NANOSECONDS_PER_MICROSECOND))...,)
+fldmod(x::Year)::Year = x
+fldmod(x::Month)::Tuple{Year,Month} = fldmod2(fldmod(x, Month(MONTHS_PER_YEAR))...,)
+fldmod(x::Week)::Week = x
+fldmod(x::Day)::Tuple{Week,Day} = fldmod2(fldmod(x, Day(DAYS_PER_WEEK))...,)
+fldmod(x::Hour)::Tuple{Day,Hour} = fldmod2(fldmod(x, Hour(HOURS_PER_DAY))...,)
+fldmod(x::Minute)::Tuple{Hour,Minute} = fldmod2(fldmod(x, Minute(MINUTES_PER_HOUR))...,)
+fldmod(x::Second)::Tuple{Minute,Second} = fldmod2(fldmod(x, Second(SECONDS_PER_MINUTE))...,)
+fldmod(x::Millisecond)::Tuple{Second,Millisecond} = fldmod2(fldmod(x, Millisecond(MILLISECONDS_PER_SECOND))...,)
+fldmod(x::Microsecond)::Tuple{Millisecond,Microsecond} = fldmod2(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
+fldmod(x::Nanosecond)::Tuple{Microsecond,Nanosecond} = fldmod2(fldmod(x, Nanosecond(NANOSECONDS_PER_MICROSECOND))...,)
 
 function canonical(x::Nanosecond; weeks::Bool=false)
     result = fldmod(x)
