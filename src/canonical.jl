@@ -14,13 +14,7 @@ canonical(x::Year) = Dates.canonicalize(x+Month(0))
 
 function canonical(x::CompoundPeriod)
     c = Dates.canonicalize(x)
-    if c == CompoundPeriodEmpty
-        if length(x) > 0
-            return x.periods[1] - x.periods[1]
-        else
-            return CompoundPeriodZero
-        end
-    end
+    c == CompoundPeriodEmpty && CompoundPeriodZero
     res = c.periods[1]
     !signbit(res) && return c
     c = c - res
