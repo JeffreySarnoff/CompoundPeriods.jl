@@ -1,4 +1,5 @@
 const CompoundPeriodZero = Nanosecond(0)
+const CompoundPeriodEmpty = CompoundPeriod(CompoundPeriodZero)
 
 canonical(x::Nanosecond) = Dates.canonicalize(Microsecond(0)+x)
 canonical(x::Microsecond) = Dates.canonicalize(x+Nanosecond(0))
@@ -13,6 +14,13 @@ canonical(x::Year) = Dates.canonicalize(x+Month(0))
 
 function canonical(x::CompoundPeriod)
     c = Dates.canonicalize(x)
+    if c === CompoundPeriodEmpty
+        if length(x) > 0
+            return x.periods[1] - x.periods[1]
+        else
+            return CompoundPeriodZero
+        end
+    end
     res = c.periods[1]
     !signbit(res) && return c
     c = c - res
