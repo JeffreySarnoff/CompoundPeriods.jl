@@ -1,6 +1,5 @@
 const CompoundPeriodZero = Nanosecond(0)
 
-canonical(x::CompoundPeriod) = Dates.canonicalize(x)
 canonical(x::Nanosecond) = Dates.canonicalize(Microsecond(0)+x)
 canonical(x::Microsecond) = Dates.canonicalize(x+Nanosecond(0))
 canonical(x::Millisecond) = Dates.canonicalize(x+Microsecond(0))
@@ -12,8 +11,20 @@ canonical(x::Week) = Dates.canonicalize(x+Day(0))
 canonical(x::Month) = Dates.canonicalize(Year(0)+x)
 canonical(x::Year) = Dates.canonicalize(x+Month(0))
 
+function canonical(x::CompoundPeriod)
+    c = Dates.canonicalize(x)
+    res = c.periods[1]
+    !signbit(res) && return c
+    c = c - res
+    for p in c.periods
+        x, y = fldmod(p)
+        res = res + x + y
+    end
+    return res
+end
 
-#=
+
+
 fldmod2(x::Int64, y::Month) = (Year(x), y)
 fldmod2(x::Int64, y::Day) = (Week(x), y)
 fldmod2(x::Int64, y::Hour) = (Day(x), y)
@@ -34,6 +45,7 @@ fldmod(x::Millisecond)::Tuple{Second,Millisecond} = fldmod2(fldmod(x, Millisecon
 fldmod(x::Microsecond)::Tuple{Millisecond,Microsecond} = fldmod2(fldmod(x, Microsecond(MICROSECONDS_PER_MILLISECOND))...,)
 fldmod(x::Nanosecond)::Tuple{Microsecond,Nanosecond} = fldmod2(fldmod(x, Nanosecond(NANOSECONDS_PER_MICROSECOND))...,)
 
+#=
 function canonical(x::Nanosecond; weeks::Bool=false)
     result = fldmod(x)
     result = (fldmod(result[1])..., result[2])
