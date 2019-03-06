@@ -1,5 +1,19 @@
 const CompoundPeriodZero = Nanosecond(0)
 
+canonical(x::CompoundPeriod) = Dates.canonicalize(x)
+canonical(x::Nanosecond) = Dates.canonicalize(Microsecond(0)+x)
+canonical(x::Microsecond) = Dates.canonicalize(x+Nanosecond(0))
+canonical(x::Millisecond) = Dates.canonicalize(x+Microsecond(0))
+canonical(x::Second) = Dates.canonicalize(x+Millisecond(0))
+canonical(x::Minute) = Dates.canonicalize(x+Second(0))
+canonical(x::Hour) = Dates.canonicalize(x+Minute(0))
+canonical(x::Day) = Dates.canonicalize(x+Hour(0))
+canonical(x::Week) = Dates.canonicalize(x+Day(0))
+canonical(x::Month) = Dates.canonicalize(Year(0)+x)
+canonical(x::Year) = Dates.canonicalize(x+Month(0))
+
+
+#=
 fldmod2(x::Int64, y::Month) = (Year(x), y)
 fldmod2(x::Int64, y::Day) = (Week(x), y)
 fldmod2(x::Int64, y::Hour) = (Day(x), y)
@@ -172,3 +186,4 @@ function fldmod_hours(cperiod::CompoundPeriod)
         
     return dys, hrs, mins, secs, millis, micros, nanos
 end
+=#
