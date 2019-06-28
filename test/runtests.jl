@@ -16,3 +16,6 @@ cperiod = canonical(Minute(-3600) + Second(22))
 
 @test isempty(Hour(0) + Minute(0))
 @test canonical(Hour(0)+Minute(0)) == Nanosecond(0)
+
+@test Year(2)+Month(12)+Hour(7) > Year(1)+Month(24)+Minute(5)
+@test Year(2)+Month(12)+Hour(7) == Year(1)+Month(24)+Hour(7)
