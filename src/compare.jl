@@ -1,3 +1,42 @@
+function (==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+    return Base.:(==)(canonical(x), canonical(y))
+end
+function (!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+    return Base.:(!=)(canonical(x), canonical(y))
+end
+
+function (<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+    cx, cy = canonical(x), canonical(y)
+    xmonths, ymonths = Months(cx), Months(cy)
+    xsecs, ysecs = Seconds(cx), Seconds(cy)
+    xnanos, ynanos = Nanoseconds(x-xsecs), Nanoseconds(y-ysecs)
+    return xmonths < ymonths || (xmonths == ymonths && (xsecs < ysecs || (xsecs == ysecs && xnanos < ynanos)))
+end
+
+function (>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+    cx, cy = canonical(x), canonical(y)
+    xmonths, ymonths = Months(cx), Months(cy)
+    xsecs, ysecs = Seconds(cx), Seconds(cy)
+    xnanos, ynanos = Nanoseconds(x-xsecs), Nanoseconds(y-ysecs)
+    return xmonths > ymonths || (xmonths == ymonths && (xsecs > ysecs || (xsecs == ysecs && xnanos > ynanos)))
+end
+
+function (<=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+    cx, cy = canonical(x), canonical(y)
+    xmonths, ymonths = Months(cx), Months(cy)
+    xsecs, ysecs = Seconds(cx), Seconds(cy)
+    xnanos, ynanos = Nanoseconds(x-xsecs), Nanoseconds(y-ysecs)
+    return xmonths < ymonths || (xmonths == ymonths && (xsecs < ysecs || (xsecs == ysecs && xnanos <= ynanos)))
+end
+
+function (>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+    cx, cy = canonical(x), canonical(y)
+    xmonths, ymonths = Months(cx), Months(cy)
+    xsecs, ysecs = Seconds(cx), Seconds(cy)
+    xnanos, ynanos = Nanoseconds(x-xsecs), Nanoseconds(y-ysecs)
+    return xmonths > ymonths || (xmonths == ymonths && (xsecs > ysecs || (xsecs == ysecs && xnanos >= ynanos)))
+end
+
 function (==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
     mx, my = Months(x), Months(y)
     mx !== my && return false
