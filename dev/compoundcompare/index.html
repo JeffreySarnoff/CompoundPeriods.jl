@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Compound Period Comparisons · CompoundPeriods</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link href="../assets/documenter.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>CompoundPeriods</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../">Overview</a></li><li><a class="toctext" href="../canonicalcompoundperiods/">Canonical Compound Periods</a></li><li><a class="toctext" href="../reversecompoundperiods/">Reverse Compound Periods</a></li><li><a class="toctext" href="../wellbehavedtemporalcomposites/">Well Behaved Temporal Composites</a></li><li class="current"><a class="toctext" href>Compound Period Comparisons</a><ul class="internal"></ul></li><li><a class="toctext" href="../nanosecondincrements/">Nanosecond Increments</a></li><li><a class="toctext" href="../minmaxminmax/">min, max, minmax</a></li><li><a class="toctext" href="../datestimes/">Dates, Times</a></li></ul></nav><article id="docs"><header><nav><ul><li><a href>Compound Period Comparisons</a></li></ul><a class="edit-page" href="https://github.com/JeffreySarnoff/CompoundPeriods.jl/blob/master/docs/src/compoundcompare.md"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Compound Period Comparisons</span><a class="fa fa-bars" href="#"></a></div></header><pre><code class="language-julia">julia&gt; using CompoundPeriods, Dates
+
+julia&gt; cperiod1 = Month(4)+Hour(1)+Microsecond(567)
+4 months, 1 hour, 567 microseconds
+
+julia&gt; cperiod2 = Month(4)+Hour(1)+Second(1)+Microsecond(5)
+4 months, 1 hour, 1 second, 5 microseconds
+
+julia&gt; period1 = Hour(15)
+15 hours
+
+julia&gt; cperiod1 &lt; cperiod2
+true
+
+julia&gt; cperiod1 &gt; period1
+true
+
+julia&gt; Minute(15)+Second(150) &lt; period1
+true</code></pre><footer><hr/><a class="previous" href="../wellbehavedtemporalcomposites/"><span class="direction">Previous</span><span class="title">Well Behaved Temporal Composites</span></a><a class="next" href="../nanosecondincrements/"><span class="direction">Next</span><span class="title">Nanosecond Increments</span></a></footer></article></body></html>

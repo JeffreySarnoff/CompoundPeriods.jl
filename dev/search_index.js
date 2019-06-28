@@ -41,6 +41,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "compoundcompare/#",
+    "page": "Compound Period Comparisons",
+    "title": "Compound Period Comparisons",
+    "category": "page",
+    "text": "julia> using CompoundPeriods, Dates\n\njulia> cperiod1 = Month(4)+Hour(1)+Microsecond(567)\n4 months, 1 hour, 567 microseconds\n\njulia> cperiod2 = Month(4)+Hour(1)+Second(1)+Microsecond(5)\n4 months, 1 hour, 1 second, 5 microseconds\n\njulia> period1 = Hour(15)\n15 hours\n\njulia> cperiod1 < cperiod2\ntrue\n\njulia> cperiod1 > period1\ntrue\n\njulia> Minute(15)+Second(150) < period1\ntrue"
+},
+
+{
     "location": "nanosecondincrements/#",
     "page": "Nanosecond Increments",
     "title": "Nanosecond Increments",
