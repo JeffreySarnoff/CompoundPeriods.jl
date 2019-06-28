@@ -8,6 +8,7 @@ makedocs(
         "Canonical Compound Periods"         => "canonicalcompoundperiods.md",
         "Reverse Compound Periods"           => "reversecompoundperiods.md",
         "Well Behaved Temporal Composites"   => "wellbehavedtemporalcomposites.md",
+        "Compound Period Comparisons"        => "compoundcompare.md",
         "Nanosecond Increments"              => "nanosecondincrements.md",
         "min, max, minmax"                   => "minmaxminmax.md",
         "Dates, Times"                       => "datestimes.md"
