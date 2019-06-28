@@ -10,17 +10,20 @@ notifications:
   email: false
 git:
   depth: 99999999
-script:
-  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia --color=yes -e 'using InteractiveUtils; versioninfo(); import Pkg; Pkg.clone(pwd()); Pkg.build("CompoundPeriods")'
-  - julia --color=yes --check-bounds=yes -e 'import Pkg; Pkg.test("CompoundPeriods"; coverage=true)'
+#matrix:
+  # allow_failures:
+  #  - julia: nightly
+  # fast_finish: true
 after_success:
-  - julia -e 'import Pkg; cd(Pkg.dir("CompoundPeriods")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder()); Codecov.submit(process_folder())'
+  - julia -e 'using Pkg; cd(Pkg.dir("CompoundPeriods")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+  #- julia -e 'using Pkg; cd(Pkg.dir("CompoundPeriods")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
 jobs:
   include:
     - stage: "Documentation"
+      julia: 1.0
+      os: linux
       script:
-        - julia --project=docs -e 'using Pkg; Pkg.instantiate();
-                                   Pkg.add(PackageSpec(path=pwd()))'
-        - julia --project=docs --color=yes docs/make.jl
-after_success: skip
+        - julia --project=docs/ -e 'using Pkg; Pkg.instantiate(); Pkg.develop(PackageSpec(path=pwd()))'
+        - julia --project=docs/ docs/make.jl
+      after_success: skip
+
