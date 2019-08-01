@@ -22,10 +22,10 @@ function canonical(x::CompoundPeriod)
         x, y = fldmod(p)
         res = res + x + y
     end
+    wks = Weeks(res)
+    res = res - wks + Day(7*weeks(wks))
     return res
 end
-
-
 
 fldmod2(x::Int64, y::Month) = (Year(x), y)
 fldmod2(x::Int64, y::Day) = (Week(x), y)
