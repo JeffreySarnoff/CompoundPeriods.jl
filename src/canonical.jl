@@ -12,6 +12,10 @@ canonical(x::Week) = Dates.canonicalize(x+Day(0))
 canonical(x::Month) = Dates.canonicalize(Year(0)+x)
 canonical(x::Year) = Dates.canonicalize(x+Month(0))
 
+canonical(x::DateTime) = canonical(x.instant.periods)
+canonical(x::Date) = canonical(x.instant.periods)
+canonical(x::Time) = canonical(x.instant)
+
 function canonical(x::CompoundPeriod)
     c = Dates.canonicalize(x)
     length(c) == 0 && return CompoundPeriodZero
