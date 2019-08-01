@@ -8,7 +8,7 @@ canonical(x::Second) = Dates.canonicalize(x+Millisecond(0))
 canonical(x::Minute) = Dates.canonicalize(x+Second(0))
 canonical(x::Hour) = Dates.canonicalize(x+Minute(0))
 canonical(x::Day) = Dates.canonicalize(x+Hour(0))
-canonical(x::Week) = Days(weeks(x) * 7)
+canonical(x::Week) = Day(weeks(x) * 7)
 canonical(x::Month) = Dates.canonicalize(Year(0)+x)
 canonical(x::Year) = Dates.canonicalize(x+Month(0))
 
