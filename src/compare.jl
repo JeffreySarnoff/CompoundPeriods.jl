@@ -37,80 +37,74 @@ function Base.:(>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
     return xmonths > ymonths || (xmonths == ymonths && (xsecs > ysecs || (xsecs == ysecs && xnanos >= ynanos)))
 end
 
-for P in (:DatePeriod, :TimePeriod)
- @eval begin
+function Base.:(==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
+  mx, my = Months(x), Months(y)
+  mx !== my && return false
 
-  function (==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
-      mx, my = Months(x), Months(y)
-      mx !== my && return false
+  mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
+  typ = plural(mintyp)
+  xx = typ(x)
+  yy = typ(y)
+  xx.value == yy.value
+end
 
-      mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
-      typ = plural(mintyp)
-      xx = typ(x)
-      yy = typ(y)
-      xx.value == yy.value
-  end
+function Base.:(!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
+  mx, my = Months(x), Months(y)
+  mx === my && return false
 
-  function (!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
-      mx, my = Months(x), Months(y)
-      mx === my && return false
+  mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
+  typ = plural(mintyp)
+  xx = typ(x)
+  yy = typ(y)
+  xx.value != yy.value
+end
 
-      mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
-      typ = plural(mintyp)
-      xx = typ(x)
-      yy = typ(y)
-      xx.value != yy.value
-  end
+function Base.:(<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
+  mx, my = Months(x), Months(y)
+  mx < my && return true
+  mx !== my && return false
 
-  function (<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
-      mx, my = Months(x), Months(y)
-      mx < my && return true
-      mx !== my && return false
+  mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
+  typ = plural(mintyp)
+  xx = typ(x)
+  yy = typ(y)
+  xx.value < yy.value
+end
 
-      mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
-      typ = plural(mintyp)
-      xx = typ(x)
-      yy = typ(y)
-      xx.value < yy.value
-  end
+function Base.:(<=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
+  mx, my = Months(x), Months(y)
+  mx < my && return true
+  mx > my && return false
 
-  function (<=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
-      mx, my = Months(x), Months(y)
-      mx < my && return true
-      mx > my && return false
+  mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
+  typ = plural(mintyp)
+  xx = typ(x)
+  yy = typ(y)
+  xx.value <= yy.value
+end
 
-      mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
-      typ = plural(mintyp)
-      xx = typ(x)
-      yy = typ(y)
-      xx.value <= yy.value
-  end
+function Base.:(>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
+  mx, my = Months(x), Months(y)
+  mx > my && return true
+  mx !== my && return false
 
-  function (>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
-      mx, my = Months(x), Months(y)
-      mx > my && return true
-      mx !== my && return false
+  mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
+  typ = plural(mintyp)
+  xx = typ(x)
+  yy = typ(y)
+  xx.value > yy.value
+end
 
-      mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
-      typ = plural(mintyp)
-      xx = typ(x)
-      yy = typ(y)
-      xx.value > yy.value
-  end
+function Base.:(>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:Period}
+  mx, my = Months(x), Months(y)
+  mx > my && return true
+  mx < my && return false
 
-  function (>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
-      mx, my = Months(x), Months(y)
-      mx > my && return true
-      mx < my && return false
-
-      mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
-      typ = plural(mintyp)
-      xx = typ(x)
-      yy = typ(y)
-      xx.value >= yy.value
-  end
-
- end
+  mintyp = Dates.periodisless(mintype(x)(1), P2(1)) ? mintype(x) : P2
+  typ = plural(mintyp)
+  xx = typ(x)
+  yy = typ(y)
+  xx.value >= yy.value
 end
 
 const PeriodTypes = (:Year, :Month, :Week, :Day, :Hour, :Minute, :Second, :Millisecond, :Microsecond, :Nanosecond)
