@@ -1,4 +1,4 @@
-function Base.:(==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
+function Base.:(==)(x::P1, y::P2) where {P1<:Dates.CompoundPeriod, P2<:Dates.CompoundPeriod}
     return Base.:(==)(canonical(x), canonical(y))
 end
 function Base.:(!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
