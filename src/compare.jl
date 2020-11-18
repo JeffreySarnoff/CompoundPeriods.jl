@@ -40,7 +40,7 @@ end
 for P in (:DatePeriod, :TimePeriod)
  @eval begin
 
-  function (==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:P}
+  function (==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
       mx, my = Months(x), Months(y)
       mx !== my && return false
 
@@ -51,7 +51,7 @@ for P in (:DatePeriod, :TimePeriod)
       xx.value == yy.value
   end
 
-  function (!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:P}
+  function (!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
       mx, my = Months(x), Months(y)
       mx === my && return false
 
@@ -63,7 +63,7 @@ for P in (:DatePeriod, :TimePeriod)
   end
 
 
-  function (<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:P}
+  function (<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
       mx, my = Months(x), Months(y)
       mx < my && return true
       mx !== my && return false
@@ -75,7 +75,7 @@ for P in (:DatePeriod, :TimePeriod)
       xx.value < yy.value
   end
 
-  function (<=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:P}
+  function (<=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
       mx, my = Months(x), Months(y)
       mx < my && return true
       mx > my && return false
@@ -87,7 +87,7 @@ for P in (:DatePeriod, :TimePeriod)
       xx.value <= yy.value
   end
 
-  function (>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:P}
+  function (>)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
       mx, my = Months(x), Months(y)
       mx > my && return true
       mx !== my && return false
@@ -99,7 +99,7 @@ for P in (:DatePeriod, :TimePeriod)
       xx.value > yy.value
   end
 
-  function (>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:P}
+  function (>=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:$P}
       mx, my = Months(x), Months(y)
       mx > my && return true
       mx < my && return false
