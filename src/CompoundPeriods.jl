@@ -1,6 +1,7 @@
 module CompoundPeriods
 
-export Period, CompoundPeriod, ReverseCompoundPeriod,
+# export Period, CompoundPeriod, 
+export ReverseCompoundPeriod,
     typesof, canonical,
     Years, Months, Weeks, Days, Hours, Minutes, Seconds,
     Milliseconds, Microseconds, Nanoseconds, TimeUnits,
