@@ -1,7 +1,6 @@
 module CompoundPeriods
 
-# export Period, CompoundPeriod, 
-export ReverseCompoundPeriod,
+export Period, CompoundPeriod, ReverseCompoundPeriod,
     typesof, canonical,
     Years, Months, Weeks, Days, Hours, Minutes, Seconds,
     Milliseconds, Microseconds, Nanoseconds, TimeUnits,
@@ -17,11 +16,10 @@ import Base: convert,
 
 import Dates: AbstractTime, Period, CompoundPeriod, canonicalize,
     Year, Month, Week, Day, Hour, Minute, Second, Millisecond, Microsecond, Nanosecond,
-    year, month, week, day, hour, minute, second, millisecond, microsecond, nanosecond
+    year, month, week, day, hour, minute, second, millisecond, microsecond, nanosecond,
+    Time, Date, DateTime
 
-import Dates: Time, Date, DateTime
 using Dates
-
 
 include("timeunitper.jl")
 include("reversecompound.jl")
