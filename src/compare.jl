@@ -1,10 +1,3 @@
-function Base.:(==)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
-    return Base.:(==)(canonical(x), canonical(y))
-end
-function Base.:(!=)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
-    return Base.:(!=)(canonical(x), canonical(y))
-end
-
 function Base.:(<)(x::P1, y::P2) where {P1<:CompoundPeriod, P2<:CompoundPeriod}
     cx, cy = canonical(x), canonical(y)
     xmonths, ymonths = Months(cx), Months(cy)
