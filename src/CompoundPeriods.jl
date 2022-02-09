@@ -32,7 +32,6 @@ include("indexable.jl")
 include("misc.jl")
 include("selector.jl")
 include("canonical.jl")
-include("compare.jl")
 include("pluralperiods.jl")
 
 end # Compound Periods
