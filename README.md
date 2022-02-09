@@ -1,5 +1,5 @@
 ## CompoundPeriods.jl
-### Some enhancements for Dates.CompoundPeriod (Julia v1)
+### Some enhancements for Dates.CompoundPeriod
 
 ----
 
