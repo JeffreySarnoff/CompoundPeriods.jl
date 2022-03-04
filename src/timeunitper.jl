@@ -37,6 +37,10 @@ const NANOSECONDS_PER_HOUR = NANOSECONDS_PER_MINUTE * MINUTES_PER_HOUR
 const NANOSECONDS_PER_DAY = NANOSECONDS_PER_HOUR * HOURS_PER_DAY
 const NANOSECONDS_PER_WEEK = NANOSECONDS_PER_DAY * DAYS_PER_WEEK
 
+Quarter(x::Year) = Quarter(x.value * QUARTERS_PER_YEAR)
+Month(x::Year) = Month(x.value * MONTHS_PER_YEAR)
+Month(x::Quarter) = Month(x.value * QUARTERS_PER_MONTH)
+
 Day(x::Week) = Day(x.value * DAYS_PER_WEEK)
 Hour(x::Week) = Hour(x.value * HOURS_PER_WEEK)
 Minute(x::Week) = Minute(x.value * MINUTES_PER_WEEK)
