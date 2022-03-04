@@ -1,6 +1,3 @@
-const CompoundPeriodZero = Nanosecond(0)
-const CompoundPeriodEmpty = CompoundPeriod(CompoundPeriodZero)
-
 canonical(x::Nanosecond) = weeks2days(Dates.canonicalize(Microsecond(0)+x))
 canonical(x::Microsecond) = weeks2days(Dates.canonicalize(x+Nanosecond(0)))
 canonical(x::Millisecond) = weeks2days(Dates.canonicalize(x+Microsecond(0)))
