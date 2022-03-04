@@ -1,16 +1,27 @@
 const CompoundPeriodZero = Nanosecond(0)
 const CompoundPeriodEmpty = CompoundPeriod(CompoundPeriodZero)
 
-canonical(x::Nanosecond) = Dates.canonicalize(Microsecond(0)+x)
-canonical(x::Microsecond) = Dates.canonicalize(x+Nanosecond(0))
-canonical(x::Millisecond) = Dates.canonicalize(x+Microsecond(0))
-canonical(x::Second) = Dates.canonicalize(x+Millisecond(0))
-canonical(x::Minute) = Dates.canonicalize(x+Second(0))
-canonical(x::Hour) = Dates.canonicalize(x+Minute(0))
-canonical(x::Day) = Dates.canonicalize(x+Hour(0))
-canonical(x::Week) = Dates.canonicalize(x+Day(0))
+
+canonical(x::Nanosecond) = weeks2days(Dates.canonicalize(Microsecond(0)+x))
+canonical(x::Microsecond) = weeks2days(Dates.canonicalize(x+Nanosecond(0)))
+canonical(x::Millisecond) = weeks2days(Dates.canonicalize(x+Microsecond(0)))
+canonical(x::Second) = weeks2days(Dates.canonicalize(x+Millisecond(0)))
+canonical(x::Minute) = weeks2days(Dates.canonicalize(x+Second(0)))
+canonical(x::Hour) = weeks2days(Dates.canonicalize(x+Minute(0)))
+canonical(x::Day) = weeks2days(Dates.canonicalize(x+Hour(0)))
+canonical(x::Week) = Day(weeks(x) * 7)
 canonical(x::Month) = Dates.canonicalize(Year(0)+x)
 canonical(x::Year) = Dates.canonicalize(x+Month(0))
+
+canonical(x::DateTime) = canonical(x.instant.periods)
+canonical(x::Date) = canonical(x.instant.periods)
+canonical(x::Time) = canonical(x.instant)
+
+function weeks2days(x::T) where {T<:Union{Period,CompoundPeriod})
+    wks = Weeks(x)
+    x = x - wks + Day(7*weeks(wks))
+    return x
+end
 
 function canonical(x::CompoundPeriod)
     c = Dates.canonicalize(x)
@@ -22,10 +33,11 @@ function canonical(x::CompoundPeriod)
         x, y = fldmod(p)
         res = res + x + y
     end
+    wks = Weeks(res)
+    res = res - wks + Day(7*weeks(wks))
+    res = weeks2days(res)
     return res
 end
-
-
 
 fldmod2(x::Int64, y::Month) = (Year(x), y)
 fldmod2(x::Int64, y::Day) = (Week(x), y)
