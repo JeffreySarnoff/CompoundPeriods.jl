@@ -1,4 +1,6 @@
+const QUARTERS_PER_YEAR = Int64(4)
 const MONTHS_PER_YEAR = Int64(12)
+const MONTHS_PER_QUARTER = Int64(3)
 
 const DAYS_PER_WEEK = Int64(7)
 
