@@ -40,6 +40,9 @@ function Date(dt::CompoundPeriod)
 end
 DateTime(dtm::CompoundPeriod)  = Date(dtm) + Time(hour(dtm), minute(dtm), second(dtm), millisecond(dtm))
 
-signbit(period::Period) = signbit(period.value)
+# signbit(::Period) added to Julia 1.11
+@static if !hasmethod(signbit, Tuple{Period})
+    signbit(period::Period) = signbit(period.value)
+end
 signbit(cperiod::CompoundPeriod) = signbit(max(canonical(cperiod)))
 sign(cperiod::CompoundPeriod) = sign(max(canonical(cperiod)))
